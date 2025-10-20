@@ -3,139 +3,67 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Prosty link</title>
+  <title>Prosty link (globalny)</title>
   <link rel="icon" href="data:,">
   <style>
-    :root {
-      --bg:#0f1220; --fg:#e9ecf1; --accent:#4bd1a0; --muted:#97a1ae;
-      --btn:#22283a; --btn-hover:#2d3550;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0}
-    body{
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial;
-      background: radial-gradient(1200px 800px at 50% 30%, #1a1f35 0%, #0d1020 60%, #0a0d1a 100%);
-      color:var(--fg);
-    }
-    .main{
-      min-height:100%;display:flex;align-items:center;justify-content:center;
-      padding:24px;text-align:center;
-    }
-    a#mainLink{
-      font-size:clamp(20px,5vw,42px);color:var(--accent);text-decoration:none;
-      border-bottom:2px solid transparent;transition:.2s ease;
-    }
-    a#mainLink:hover,a#mainLink:focus{border-bottom-color:var(--accent);filter:brightness(1.05)}
+    :root { --bg:#0f1220; --fg:#e9ecf1; --accent:#4bd1a0; --muted:#97a1ae; --btn:#22283a; --btn-hover:#2d3550; }
+    *{box-sizing:border-box} html,body{height:100%;margin:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial;background:radial-gradient(1200px 800px at 50% 30%, #1a1f35 0%, #0d1020 60%, #0a0d1a 100%);color:var(--fg)}
+    .main{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center}
+    a#mainLink{font-size:clamp(20px,5vw,42px);color:var(--accent);text-decoration:none;border-bottom:2px solid transparent;transition:.2s}
+    a#mainLink:hover,a#mainLink:focus{border-bottom-color:var(--accent)}
     .topbar{position:fixed;top:10px;right:10px;display:flex;gap:8px}
-    button{
-      background:var(--btn);color:var(--fg);border:1px solid #3a4568;
-      padding:8px 12px;border-radius:10px;cursor:pointer;transition:.15s;font-weight:600;
-    }
+    button{background:var(--btn);color:var(--fg);border:1px solid #3a4568;padding:8px 12px;border-radius:10px;cursor:pointer;transition:.15s;font-weight:600}
     button:hover{background:var(--btn-hover)}
-    dialog::backdrop{background:rgba(0,0,0,.5)}
-    dialog{
-      border:1px solid #3a4568;border-radius:12px;padding:18px;background:#12172a;color:var(--fg);
-      width:min(90vw,420px);
-    }
-    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:.95rem}
-    input[type="text"],input[type="url"]{
-      width:100%;background:#0e1324;border:1px solid #2b3554;color:var(--fg);
-      padding:10px 12px;border-radius:10px;outline:none;
-    }
-    .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
-    .small{font-size:.85rem;color:var(--muted);margin-top:10px}
+    .small{position:fixed;bottom:10px;width:100%;text-align:center;color:var(--muted);font-size:.85rem}
   </style>
 </head>
 <body>
   <div class="topbar">
-    <button id="editBtn">Edytuj</button>
-    <button id="resetBtn" title="Wyczyść zapisane ustawienia">Reset</button>
+    <button id="editBtn" title="Zmień dla wszystkich (commit na GitHubie)">Edytuj (globalnie)</button>
+    <button id="refreshBtn" title="Wczytaj ponownie konfigurację">Odśwież</button>
   </div>
 
   <main class="main">
-    <a id="mainLink" href="https://example.com" target="_blank" rel="noopener">Kliknij tutaj</a>
+    <a id="mainLink" href="#" target="_blank" rel="noopener">Ładowanie…</a>
   </main>
 
-  <dialog id="editDialog">
-    <form method="dialog" id="editForm">
-      <h3>Ustaw link</h3>
-      <label for="textInput">Tekst linku</label>
-      <input id="textInput" type="text" placeholder="np. Otwórz mój link" />
-      <label for="urlInput">Adres URL</label>
-      <input id="urlInput" type="url" placeholder="https://..." />
-      <div class="small">Zmiany zapisują się w tej przeglądarce. Żeby zmienić dla wszystkich, edytuj plik index.html w repozytorium.</div>
-      <div class="actions">
-        <button value="cancel">Anuluj</button>
-        <button id="saveBtn" value="default">Zapisz</button>
-      </div>
-    </form>
-  </dialog>
+  <div class="small">Ten link jest sterowany plikiem data.json w repo. Zmiana = commit → widzą wszyscy.</div>
 
   <script>
-    (function() {
-      const link = document.getElementById('mainLink');
-      const editBtn = document.getElementById('editBtn');
-      const resetBtn = document.getElementById('resetBtn');
-      const dialog = document.getElementById('editDialog');
-      const textInput = document.getElementById('textInput');
-      const urlInput = document.getElementById('urlInput');
-      const KEY = 'simpleLinkPage.v1';
+    // Dostosuj te 2 wartości, jeśli zmienisz nazwę użytkownika/repo/gałęzi:
+    const OWNER = 'majstersztyk24';
+    const REPO  = 'kpss';
+    const BRANCH = 'main';
 
-      function load() {
-        try {
-          const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
-          if (saved && saved.text && saved.url) {
-            link.textContent = saved.text;
-            link.href = saved.url;
-          }
-        } catch (e) {}
-      }
-      function save(text, url) {
+    const link = document.getElementById('mainLink');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const editBtn = document.getElementById('editBtn');
+
+    async function loadConfig(alertOnError) {
+      try {
+        const res = await fetch('data.json?v=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const cfg = await res.json();
+        const text = (cfg.text || 'Kliknij tutaj').toString();
+        let url = (cfg.url || 'https://example.com').toString().trim();
+        if (url && !/^https?:\/\//i.test(url)) url = 'https://' + url;
         link.textContent = text;
         link.href = url;
-        localStorage.setItem(KEY, JSON.stringify({ text, url }));
-      }
-
-      const supportsDialog = typeof HTMLDialogElement === 'function' && 'showModal' in HTMLDialogElement.prototype;
-
-      if (supportsDialog) {
-        editBtn.addEventListener('click', () => {
-          textInput.value = link.textContent.trim();
-          urlInput.value = link.href;
-          dialog.showModal();
-          setTimeout(() => textInput.focus(), 50);
-        });
-        document.getElementById('editForm').addEventListener('submit', (e) => {
-          e.preventDefault();
-          const text = (textInput.value || '').trim() || 'Kliknij tutaj';
-          let url = (urlInput.value || '').trim();
-          if (url && !/^https?:\/\//i.test(url)) url = 'https://' + url;
-          if (!url) return alert('Podaj adres URL.');
-          save(text, url);
-          dialog.close();
-        });
-      } else {
-        // Fallback dla starszych przeglądarek: proste prompt()
-        editBtn.addEventListener('click', () => {
-          const t = prompt('Tekst linku:', link.textContent.trim());
-          if (t === null) return;
-          let u = prompt('Adres URL:', link.href);
-          if (u === null) return;
-          u = (u || '').trim();
-          if (u && !/^https?:\/\//i.test(u)) u = 'https://' + u;
-          if (!u) return alert('Podaj URL.');
-          save((t || '').trim() || 'Kliknij tutaj', u);
-        });
-      }
-
-      resetBtn.addEventListener('click', () => {
-        localStorage.removeItem(KEY);
+      } catch (e) {
+        if (alertOnError) alert('Nie udało się wczytać data.json. Upewnij się, że plik istnieje w repo.');
         link.textContent = 'Kliknij tutaj';
         link.href = 'https://example.com';
-      });
+      }
+    }
 
-      load();
-    })();
+    editBtn.addEventListener('click', () => {
+      const editUrl = `https://github.com/${OWNER}/${REPO}/edit/${BRANCH}/data.json`;
+      window.open(editUrl, '_blank');
+    });
+    refreshBtn.addEventListener('click', () => loadConfig(true));
+
+    loadConfig(false);
   </script>
 </body>
 </html>
