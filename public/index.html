@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>tania dziiiia - ogłoszenia</title>
+  <style>
+    :root { --bg:#0f1220; --card:#171a2b; --muted:#aab2d5; --pri:#6cc644; --txt:#e9ecff; --accent:#8ab4f8; }
+    * { box-sizing:border-box }
+    body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif; background:linear-gradient(180deg,#0f1220,#0c1022); color:var(--txt);}
+    header { padding:28px 18px; border-bottom:1px solid #232744; position:sticky; top:0; background:rgba(15,18,32,.8); backdrop-filter: blur(8px); z-index:10;}
+    .wrap { max-width:1100px; margin:0 auto; }
+    h1 { margin:0; font-size:28px; letter-spacing:.5px; display:flex; align-items:center; gap:12px;}
+    h1 .dot { width:10px; height:10px; border-radius:50%; background:var(--pri); box-shadow:0 0 12px var(--pri); display:inline-block;}
+    main { padding:24px 18px 60px; }
+    .grid { display:grid; grid-template-columns: 1fr; gap:16px; }
+    @media (min-width: 900px) { .grid { grid-template-columns: 380px 1fr; } }
+    .card { background:var(--card); border:1px solid #232744; border-radius:14px; padding:16px; box-shadow:0 6px 24px rgba(0,0,0,.25);}
+    label { font-size:13px; color:var(--muted); display:block; margin:10px 0 6px; }
+    input, textarea { width:100%; padding:10px 12px; border-radius:10px; border:1px solid #2a2f52; background:#0f1328; color:var(--txt); outline:none; }
+    textarea { min-height:96px; resize:vertical; }
+    .row { display:grid; gap:10px; grid-template-columns:1fr 1fr; }
+    .btn { display:inline-flex; gap:8px; align-items:center; padding:10px 14px; background:var(--accent); color:#0f1220; border:none; border-radius:10px; cursor:pointer; font-weight:600; }
+    .btn:disabled { opacity:.6; cursor:not-allowed; }
+    .muted { color:var(--muted); font-size:13px; }
+    .preview { display:flex; gap:8px; overflow-x:auto; padding:6px 2px; }
+    .preview img { height:84px; border-radius:10px; border:1px solid #2a2f52; }
+    .posts { display:grid; gap:12px; }
+    .post { background:#12162c; border:1px solid #232744; border-radius:14px; overflow:hidden; }
+    .post .top { display:flex; gap:12px; padding:12px; }
+    .thumbs { display:flex; gap:8px; overflow-x:auto; }
+    .thumbs img { height:140px; border-radius:12px; border:1px solid #2a2f52; }
+    .post h3 { margin:0 0 6px; font-size:18px; }
+    .meta { font-size:12px; color:var(--muted); display:flex; gap:12px; flex-wrap:wrap; }
+    .price { color:#c7f27f; font-weight:700; }
+    .desc { padding:0 12px 12px; color:#d7dbff; white-space:pre-wrap; }
+    .badge { font-size:11px; padding:4px 8px; border-radius:999px; background:#1a2040; border:1px solid #2a2f52; color:#c9d3ff; }
+    .empty { text-align:center; color:var(--muted); padding:24px; border:1px dashed #2a2f52; border-radius:12px; }
+    footer { text-align:center; color:#96a1d8; padding:28px 18px; border-top:1px solid #232744; }
+    .tip { font-size:12px; color:#9fb3ff; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1><span class="dot"></span> tania dziiiia — ogłoszenia</h1>
+    </div>
+  </header>
+  <main>
+    <div class="wrap grid">
+      <!-- Formularz dodawania -->
+      <section class="card">
+        <h2 style="margin:6px 0 8px;">Dodaj ogłoszenie</h2>
+        <p class="muted">Zdjęcia max 6 szt. (do 5 MB każde). Wymagane: tytuł i opis.</p>
+        <form id="create-form">
+          <label>Tytuł *</label>
+          <input type="text" name="title" placeholder="Np. Rower miejsky 26”" required />
+
+          <label>Opis *</label>
+          <textarea name="description" placeholder="Opisz przedmiot / ogłoszenie..." required></textarea>
+
+          <div class="row">
+            <div>
+              <label>Cena (PLN)</label>
+              <input type="number" step="0.01" name="price" placeholder="np. 99.99" />
+            </div>
+            <div>
+              <label>Lokalizacja</label>
+              <input type="text" name="location" placeholder="Miasto / dzielnica" />
+            </div>
+          </div>
+
+          <label>Kontakt</label>
+          <input type="text" name="contact" placeholder="Telefon / e-mail / DM" />
+
+          <label>Zdjęcia (max 6)</label>
+          <input id="images-input" type="file" accept="image/*" multiple />
+          <div id="preview" class="preview"></div>
+
+          <div style="display:flex; gap:10px; align-items:center; margin-top:12px;">
+            <button class="btn" id="submit-btn" type="submit">+ Dodaj ogłoszenie</button>
+            <span id="status" class="muted"></span>
+          </div>
+        </form>
+        <p class="tip" style="margin-top:10px;">Tip: Po deployu frontu na GitHub Pages ustaw w kodzie URL backendu (API_BASE), jeśli jest na innej domenie.</p>
+      </section>
+
+      <!-- Lista ogłoszeń -->
+      <section class="card">
+        <h2 style="margin:6px 0 12px;">Najnowsze</h2>
+        <div id="posts" class="posts">
+          <div class="empty">Brak ogłoszeń. Dodaj pierwsze powyżej! 🚀</div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <div class="wrap">Made with ❤️ • Zapisy lokalne (JSON) + upload plików</div>
+  </footer>
+
+  <script>
+    // Jeśli front i backend są na tej samej domenie (lokalnie: http://localhost:3000) zostaw pusty string.
+    // Jeśli hostujesz front np. na GitHub Pages, ustaw pełny URL backendu, np.:
+    // const API_BASE = "https://twoj-backend.onrender.com";
+    const API_BASE = "";
+
+    const el = (sel, root=document) => root.querySelector(sel);
+    const els = (sel, root=document) => [...root.querySelectorAll(sel)];
+
+    const postsEl = el('#posts');
+    const formEl = el('#create-form');
+    const imagesInput = el('#images-input');
+    const previewEl = el('#preview');
+    const submitBtn = el('#submit-btn');
+    const statusEl = el('#status');
+
+    const api = (path) => (API_BASE ? API_BASE : '') + path;
+
+    function humanDate(iso) {
+      try { return new Date(iso).toLocaleString('pl-PL'); } catch { return iso; }
+    }
+
+    function imgUrl(u) {
+      if (!u) return '';
+      if (u.startsWith('http')) return u;
+      return (API_BASE || '') + u;
+    }
+
+    async function loadPosts() {
+      try {
+        const res = await fetch(api('/api/posts'));
+        const data = await res.json();
+        renderPosts(data);
+      } catch (e) {
+        console.error(e);
+        postsEl.innerHTML = `<div class="empty">Nie udało się pobrać ogłoszeń.</div>`;
+      }
+    }
+
+    function renderPosts(list) {
+      if (!list || list.length === 0) {
+        postsEl.innerHTML = `<div class="empty">Brak ogłoszeń. Dodaj pierwsze powyżej! 🚀</div>`;
+        return;
+      }
+      postsEl.innerHTML = '';
+      list.forEach(p => postsEl.appendChild(postCard(p)));
+    }
+
+    function postCard(p) {
+      const card = document.createElement('article');
+      card.className = 'post';
+      const thumbs = (p.images || []).map(u => `<img loading="lazy" src="${imgUrl(u)}" alt="img">`).join('');
+      card.innerHTML = `
+        <div class="top">
+          <div class="thumbs">${thumbs || '<div class="badge">bez zdjęć</div>'}</div>
+          <div style="flex:1;">
+            <h3>${escapeHtml(p.title)}</h3>
+            <div class="meta">
+              ${p.price ? `<span class="price">${escapeHtml(p.price)} PLN</span>` : ''}
+              ${p.location ? `<span class="badge">📍 ${escapeHtml(p.location)}</span>` : ''}
+              <span class="badge">📅 ${humanDate(p.createdAt)}</span>
+              ${p.contact ? `<span class="badge">☎️ ${escapeHtml(p.contact)}</span>` : ''}
+            </div>
+          </div>
+        </div>
+        <div class="desc">${escapeHtml(p.description)}</div>
+      `;
+      return card;
+    }
+
+    function escapeHtml(s='') {
+      return String(s)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'",'&#039;');
+    }
+
+    // Podgląd zdjęć
+    imagesInput.addEventListener('change', () => {
+      previewEl.innerHTML = '';
+      const files = [...imagesInput.files].slice(0,6);
+      files.forEach(file => {
+        const url = URL.createObjectURL(file);
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = file.name;
+        previewEl.appendChild(img);
+      });
+    });
+
+    // Wysyłanie formularza
+    formEl.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      statusEl.textContent = 'Wysyłam...';
+
+      const fd = new FormData();
+      const formData = new FormData(formEl);
+      fd.append('title', formData.get('title') || '');
+      fd.append('description', formData.get('description') || '');
+      fd.append('price', formData.get('price') || '');
+      fd.append('contact', formData.get('contact') || '');
+      fd.append('location', formData.get('location') || '');
+      const files = [...(imagesInput.files || [])].slice(0,6);
+      files.forEach(f => fd.append('images', f));
+
+      try {
+        const res = await fetch(api('/api/posts'), { method: 'POST', body: fd });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.error || 'Błąd zapisu');
+        }
+        const created = await res.json();
+        statusEl.textContent = 'Dodano! ✅';
+        // odśwież listę, na górę
+        await loadPosts();
+        // reset formularza
+        formEl.reset();
+        previewEl.innerHTML = '';
+        setTimeout(() => statusEl.textContent = '', 1500);
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Ups, nie poszło 😕';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    loadPosts();
+  </script>
+</body>
+</html>
