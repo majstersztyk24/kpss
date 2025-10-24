@@ -1,14 +1,16 @@
-/* --- ZMIENNE I PODSTAWOWE STYLE (NOWOCZESNY JASNY MOTYW) --- */
+/* --- ZMIENNE I PODSTAWOWE STYLE (NOWOCZESNY KONTRASTOWY MOTYW) --- */
 :root {
     --primary-color: #004D40; /* Ciemna Zieleń (Akcent) */
     --secondary-color: #FF7043; /* Pomarańczowy/Ceglany (Akcent 2) */
     --light-bg: #FFFFFF; 
-    --surface-bg: #F0F4F8; /* Bardzo Jasny Błękit/Szarość dla kontrastu sekcji */
-    --menu-bg: #F8F9FA; /* Lekko ciemniejsze tło dla Menu */
+    --surface-bg: #F0F4F8; /* Jasne tło dla sekcji */
+    --menu-bg: #212529; /* Bardzo ciemne tło dla sekcji Menu */
+    --card-bg: #2C3034; /* Ciemne tło dla kart menu (jak w poprzednim podoba Ci się) */
+    --card-text: #F8F9FA; /* Jasny tekst na ciemnym tle karty */
     --text-color: #263238; /* Prawie Czarny/Grafit */
     --heading-font: 'Playfair Display', serif;
     --body-font: 'Montserrat', sans-serif; 
-    --border-color: rgba(0, 0, 0, 0.1);
+    --border-color: rgba(255, 255, 255, 0.1); /* Jasna ramka na ciemnym tle */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -70,12 +72,19 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
 }
 
 
-/* --- SEKCJE I TYTUŁY (NOWOCZESNY STYL) --- */
+/* --- SEKCJE I TYTUŁY --- */
 .section-title {
     text-align: center; font-size: 3.8rem; margin-bottom: 3.5rem;
     color: var(--primary-color); position: relative;
     opacity: 0; 
 }
+
+/* Dostosowanie koloru nagłówków dla sekcji Menu */
+#menu .section-title {
+    color: var(--card-text);
+}
+
+
 .content-section.visible .section-title { 
     opacity: 1; 
     transition: opacity 0.8s ease-out 0.2s;
@@ -99,15 +108,17 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
     transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1), transform 1.0s cubic-bezier(0.25, 1, 0.5, 1);
 }
 #about, #order, #highlights { background-color: var(--light-bg); }
-#menu { background-color: var(--menu-bg); } /* Wyróżnienie sekcji Menu */
+#menu { 
+    background-color: var(--menu-bg); /* Ciemne tło dla Menu */
+} 
 
 .content-section.visible { opacity: 1; transform: translateY(0); }
 
 
-/* --- BUTTONS --- */
+/* --- BUTTONS (WIĘKSZY KONTRAST) --- */
 .btn {
     display: inline-block; padding: 14px 35px;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color); /* Zmiana na pomarańczowy akcent */
     color: #fff; 
     font-weight: 600; 
     border-radius: 5px; 
@@ -115,21 +126,21 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
     border: 2px solid transparent; 
     cursor: pointer; text-transform: uppercase;
     font-size: 0.95rem; letter-spacing: 1px;
-    box-shadow: 0 5px 15px rgba(0, 77, 64, 0.2);
+    box-shadow: 0 5px 15px rgba(255, 112, 67, 0.3);
 }
 .btn:hover {
-    background-color: #00796B;
+    background-color: #E64A19;
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 77, 64, 0.4);
+    box-shadow: 0 8px 20px rgba(255, 112, 67, 0.5);
 }
 .btn-small { padding: 8px 18px; font-size: 0.85rem; letter-spacing: 0.5px; }
 
 
-/* --- NAGŁÓWEK (Poprawiony Nagłówek) --- */
+/* --- NAGŁÓWEK (Nowoczesny i Elegancki) --- */
 header {
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--text-color); /* Ciemniejsza linia pod nagłówkiem */
     position: sticky; top: 0; width: 100%; z-index: 1000;
 }
 .header-container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
@@ -143,7 +154,7 @@ header {
     position: relative;
     padding-bottom: 5px;
 }
-.logo::after { /* Nowoczesna linia pod logo */
+.logo::after { 
     content: ''; 
     position: absolute; 
     bottom: 0; 
@@ -159,10 +170,16 @@ header {
 }
 
 nav a {
-    color: var(--text-color); margin-left: 1.8rem;
-    font-weight: 500; text-decoration: none;
+    color: var(--text-color); 
+    margin-left: 1.8rem;
+    font-weight: 500; 
+    text-decoration: none;
     position: relative;
     padding: 5px 0;
+    transition: color 0.3s;
+}
+nav a:hover {
+    color: var(--secondary-color); /* Zmiana koloru linku przy najechaniu */
 }
 nav a::after {
     content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
@@ -194,7 +211,7 @@ nav a:hover::after, nav a.nav-order-link:hover::after { width: 100%; }
 
 /* --- BANER INFORMACYJNY --- */
 #new-banner {
-    background-color: var(--secondary-color); 
+    background-color: var(--primary-color); /* Zmiana na podstawowy akcent */
     color: #fff;
     padding: 1rem 0;
     font-weight: 500;
@@ -211,7 +228,7 @@ nav a:hover::after, nav a.nav-order-link:hover::after { width: 100%; }
     opacity: 0; transform: translateX(-50px); 
     transition: all 1.0s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
 }
-.about-subtitle { color: var(--secondary-color); font-size: 2.2rem; margin-bottom: 1rem; }
+.about-subtitle { color: var(--primary-color); font-size: 2.2rem; margin-bottom: 1rem; }
 
 .about-image img { 
     width: 100%; max-width: 500px; height: auto; border-radius: 8px;
@@ -223,63 +240,83 @@ nav a:hover::after, nav a.nav-order-link:hover::after { width: 100%; }
 #about.visible .about-image img { opacity: 1; transform: translateX(0) scale(1); }
 
 
-/* --- MENU Z PŁYNNYM ANIMACJĄ STAGGER (Poprawki dla Menu) --- */
+/* --- MENU Z PŁYNNYM ANIMACJĄ STAGGER (CIEMNE KARTY MENU) --- */
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 .menu-item {
-    background: var(--light-bg); /* Jasne tło karty menu na ciemniejszym tle sekcji */
+    background: var(--card-bg); /* Ciemne tło karty menu */
     border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4); /* Mocniejszy cień dla efektu premium */
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     border: 1px solid var(--border-color);
     opacity: 0;
     animation: fadeInUp 0.7s ease-out forwards;
     animation-play-state: paused;
-    overflow: hidden; /* Dzieki temu cienie i transformacje nie wplywaja na inne elementy */
+    overflow: hidden;
 }
 .luxury-item {
-    border: 2px solid var(--secondary-color);
+    border: 3px solid var(--secondary-color);
     box-shadow: 0 0 30px rgba(255, 112, 67, 0.5);
 }
 .luxury-item .btn {
-    background-color: var(--secondary-color); 
+    background-color: var(--primary-color); /* Luksusowa pizza ma zielony przycisk */
     color: #fff;
     font-weight: 700;
 }
 .luxury-item .btn:hover {
-    background-color: #E64A19;
+    background-color: #00796B;
 }
 
-/* Ustawienie płynnych opóźnień dla wszystkich 15 elementów (zmienna --i z js) */
 #menu.visible .menu-item { animation-delay: calc(var(--i) * 0.08s); animation-play-state: running; }
 
 .menu-item:hover { 
     transform: translateY(-8px) scale(1.01); 
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
 }
 
-/* POPRAWKA DLA ZDJĘĆ - Użycie object-fit i ukrycie overflow */
+/* ZDJĘCIA I TREŚĆ KARTY */
 .menu-item img {
     width: 100%; height: 220px; 
-    object-fit: cover; /* Wymuszamy poprawne dopasowanie zdjęcia */
+    object-fit: cover; 
     transition: transform 0.5s ease;
     border-bottom: 3px solid var(--primary-color);
 }
 .menu-item:hover img { 
-    transform: scale(1.08); /* Większy zoom przy hoverze */
+    transform: scale(1.08); 
 }
 
-.menu-item-content { padding: 1.5rem; display: flex; flex-direction: column; height: calc(100% - 220px); }
-.menu-item h3 { margin-bottom: 0.5rem; font-family: var(--body-font); font-weight: 600; font-size: 1.5rem; color: var(--primary-color);}
-.menu-item p { font-size: 0.95rem; color: #555; flex-grow: 1; margin-bottom: 1rem; line-height: 1.5;}
+.menu-item-content { 
+    padding: 1.5rem; 
+    display: flex; flex-direction: column; 
+    height: calc(100% - 220px); 
+}
+/* Zmiana kolorów tekstu na jasne na ciemnym tle */
+.menu-item h3 { 
+    margin-bottom: 0.5rem; 
+    font-family: var(--body-font); 
+    font-weight: 600; 
+    font-size: 1.5rem; 
+    color: var(--secondary-color); /* Nazwa pizzy na pomarańczowo */
+}
+.menu-item p { 
+    font-size: 0.95rem; 
+    color: var(--card-text); /* Opis pizzy na jasno */
+    flex-grow: 1; 
+    margin-bottom: 1rem; 
+    line-height: 1.5;
+}
 .menu-item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-.menu-item .price { font-size: 1.8rem; font-weight: bold; color: var(--secondary-color); }
+.menu-item .price { 
+    font-size: 1.8rem; 
+    font-weight: bold; 
+    color: var(--card-text); /* Cena na jasnym tle */
+}
 
 
-/* --- NOWA SEKCJA WYRÓŻNIENIA (zamiast Galerii) --- */
+/* --- SEKCJA WYRÓŻNIENIA (jasne tło) --- */
 #highlights { padding: 80px 0; background-color: var(--surface-bg); }
 
 .review-grid {
@@ -291,7 +328,7 @@ nav a:hover::after, nav a.nav-order-link:hover::after { width: 100%; }
     background: var(--light-bg);
     padding: 30px;
     border-radius: 10px;
-    border-left: 5px solid var(--secondary-color);
+    border-left: 5px solid var(--primary-color); /* Zmiana na zielony akcent */
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     opacity: 0;
     transform: translateY(20px);
@@ -308,7 +345,7 @@ nav a:hover::after, nav a.nav-order-link:hover::after { width: 100%; }
 .review-author span { font-weight: 600; color: var(--text-color); }
 
 
-/* --- ZAMÓWIENIE (Uproszczony Styl) --- */
+/* --- ZAMÓWIENIE --- */
 .order-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
 #cart-summary, #checkout-form { padding: 30px; border-radius: 8px; background: var(--surface-bg); border: 1px solid var(--border-color); }
 #cart-summary h3, #checkout-form h3 { border-bottom: 1px solid var(--border-color); color: var(--primary-color); padding-bottom: 10px; margin-bottom: 20px; }
@@ -355,7 +392,7 @@ nav a:hover::after, nav a.nav-order-link:hover::after { width: 100%; }
 
 footer {
     padding: 3rem 0;
-    background: #333; /* Ciemniejsza stopka */
+    background: var(--primary-color); /* Ciemna stopka dla spójności */
     margin-top: 50px;
     color: #ccc;
     text-align: center;
@@ -368,12 +405,12 @@ footer {
 .management-info p { font-size: 0.95rem; margin: 5px 0; color: #aaa; }
 
 
-/* --- MODAL (Bez zmian) --- */
+/* --- MODAL --- */
 .modal {
     display: none;
     position: fixed; z-index: 10000; left: 0; top: 0;
     width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8); /* Ciemniejsze tło modala */
     overflow: auto;
     animation: fadeIn 0.3s ease-out;
 }
@@ -388,7 +425,49 @@ footer {
     position: relative;
     animation: slideInUp 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
-/* ... (reszta styli modalowych) ... */
+
+.close-btn {
+    color: #aaa; float: right; font-size: 35px; font-weight: bold;
+    transition: color 0.3s; line-height: 1;
+}
+.close-btn:hover, .close-btn:focus { color: var(--secondary-color); text-decoration: none; cursor: pointer; }
+
+#modal-pizza-name { color: var(--primary-color); font-size: 2rem; margin-bottom: 1rem; }
+.modal-price { font-size: 1.8rem; font-weight: bold; color: var(--secondary-color); margin-bottom: 2rem; }
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+.modal-details-info h4, .modal-personalization h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+.modal-details-info p { margin-bottom: 10px; font-size: 0.95rem; color: #555; }
+.modal-personalization label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s;
+}
+.modal-personalization label:hover { color: var(--secondary-color); }
+.modal-personalization input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.3);
+}
+
+.add-to-cart-modal-btn {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 1.1rem;
+}
 
 /* Keyframes dla Modala */
 @keyframes slideInUp {
