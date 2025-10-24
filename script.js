@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCartModalBtn.dataset.basePrice = basePrice;
             addToCartModalBtn.dataset.baseIngredients = baseIngredients;
             
-            // Generowanie checkboxów dla dodatków (USUNIĘTE GWIAZDKI Z HTML)
+            // Generowanie checkboxów dla dodatków
             personalizationForm.innerHTML = `<p class="base-ingredients">Składniki bazowe: ${baseIngredients}</p><hr>`;
             
             extraIngredients.forEach((extra) => {
