@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizzeria Mięsna 67 - Ekskluzywne Smaki i Personalizacja</title>
+    <title>Mięsna 67 - Pizza Rzemieślnicza Premium | Bydgoszcz</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body class="light-theme">
@@ -17,13 +17,12 @@
     </div>
 
     <header>
-        <div class="container">
+        <div class="container header-container">
             <a href="#" class="logo">Mięsna 67</a>
             <nav>
                 <a href="#about">O nas</a>
                 <a href="#menu">Menu</a>
-                <a href="#gallery">Galeria</a>
-                <a href="#order">Zamów <span id="cart-counter">0</span></a>
+                <a href="#order" class="nav-order-link">Zamów <span id="cart-counter">0</span></a>
                 <a href="#contact">Kontakt</a>
             </nav>
         </div>
@@ -34,7 +33,7 @@
             <div class="hero-content">
                 <h1 class="animate-hero-1">Rzemieślnicza Pizza. Perfekcja Składników.</h1>
                 <p class="animate-hero-2">Twoje unikalne doznania kulinarne w sercu Bydgoszczy.</p>
-                <a href="#menu" class="btn animate-hero-3">Odkryj Menu Premium</a>
+                <a href="#menu" class="btn primary-btn animate-hero-3">Odkryj Menu Premium</a>
             </div>
         </section>
 
@@ -46,9 +45,10 @@
         </section>
 
         <section id="about" class="container content-section">
+            <h2 class="section-title">Nasza Filozofia</h2>
             <div class="about-grid">
                 <div class="about-text">
-                    <h2 class="section-title">Sekret Ciasta i Wypieku</h2>
+                    <h3 class="about-subtitle">Sekret Ciasta i Wypieku</h3>
                     <p>W Mięsnej 67 pizza to rytuał. Nasze ciasto, dojrzewające **72 godziny**, staje się płótnem dla najlepszych składników. Wypiek odbywa się w tradycyjnym piecu opalanym drewnem w temperaturze **450°C** przez zaledwie **90 sekund**. Skład ciasta: włoska mąka 00, woda mineralna, minimalna ilość drożdży (0.1%), sól morska. To jest nasza obietnica jakości.</p>
                 </div>
                 <div class="about-image">
@@ -58,7 +58,7 @@
         </section>
         
         <section id="menu" class="container content-section">
-            <h2 class="section-title">Ekskluzywne Menu</h2>
+            <h2 class="section-title">Rzemieślnicze Menu</h2>
             <div class="menu-grid">
                 <div class="menu-item" data-id="margherita" data-name="Margherita" data-price="32" data-base-ingredients="Sos San Marzano, Mozzarella Fior di latte, Świeża Bazylia, Oliwa EV">
                     <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop" alt="Pizza Margherita">
@@ -230,13 +230,35 @@
             </div>
         </section>
 
-        <section id="gallery" class="container content-section">
-            <h2 class="section-title">Wnętrza i Pasja</h2>
-            <div class="gallery-grid">
-                <a href="https://images.unsplash.com/photo-1579751626657-72bc17010498?q=80&w=2070&auto=format&fit=crop" class="gallery-item"><img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?q=80&w=2070&auto=format&fit=crop" alt="Składniki do pizzy"><div><i class="fas fa-search-plus"></i></div></a>
-                <a href="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop" class="gallery-item"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop" alt="Wnętrze restauracji"><div><i class="fas fa-search-plus"></i></div></a>
-                <a href="https://images.unsplash.com/photo-1604382354936-07c5d9983d34?q=80&w=2070&auto=format&fit=crop" class="gallery-item"><img src="https://images.unsplash.com/photo-1604382354936-07c5d9983d34?q=80&w=2070&auto=format&fit=crop" alt="Pizza na stole"><div><i class="fas fa-search-plus"></i></div></a>
-                <a href="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?q=80&w=2076&auto=format&fit=crop" class="gallery-item"><img src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?q=80&w=2076&auto=format&fit=crop" alt="Pizzaiolo przy pracy"><div><i class="fas fa-search-plus"></i></div></a>
+        <section id="highlights" class="content-section">
+            <div class="container">
+                <h2 class="section-title">Nasi Klienci o Mięsnej 67</h2>
+                <div class="review-grid">
+                    <div class="review-card">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"Najlepsza pizza w mieście, ciasto to absolutna perfekcja. Wreszcie rzemieślnicza jakość w Bydgoszczy!"</p>
+                        <div class="review-author">
+                            <i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i>
+                            <span>Anna M. (Google Recenzje)</span>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"Fantastyczna Diavola z idealnie chrupiącymi brzegami. Możliwość personalizacji składników to genialny pomysł!"</p>
+                        <div class="review-author">
+                            <i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star-half-alt gold"></i>
+                            <span>Piotr K. (Facebook)</span>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"Zamawiałem 'Złotą Palmę' na urodziny. Choć droga, to była to niezapomniana kolacja. Polecam to luksusowe szaleństwo."</p>
+                        <div class="review-author">
+                            <i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i>
+                            <span>"KOX123"</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -269,7 +291,7 @@
                     <input type="hidden" name="Lokalizacja (pinezka)" id="location-link">
                     <textarea name="Zamówienie" id="order-summary-hidden" style="display:none;"></textarea>
                     
-                    <button type="submit" class="btn">Zamawiam i płacę przy odbiorze</button>
+                    <button type="submit" class="btn primary-btn">Zamawiam i płacę przy odbiorze</button>
                     <p id="form-status"></p>
                 </form>
             </div>
@@ -295,7 +317,7 @@
                 <p>Paweł Konieczny & Michał Randomowy</p>
                 <p>Kontakt Biznesowy: 754 968 294</p>
             </div>
-            <p>© 2025 Pizzeria Mięsna 67. Wszelkie prawa zastrzeżone.</p>
+            <p>© 2024 Pizzeria Mięsna 67. Wszelkie prawa zastrzeżone.</p>
         </div>
     </footer>
 
@@ -322,7 +344,7 @@
                 </div>
             </div>
 
-            <button class="btn add-to-cart-modal-btn" id="add-to-cart-modal-btn" data-pizza-id="">Dodaj spersonalizowaną pizzę do koszyka</button>
+            <button class="btn primary-btn add-to-cart-modal-btn" id="add-to-cart-modal-btn" data-pizza-id="">Dodaj spersonalizowaną pizzę do koszyka</button>
         </div>
     </div>
 
