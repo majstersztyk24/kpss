@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cartTotal.innerHTML = `<strong>Do zapłaty: ${total.toFixed(2)} zł</strong>`;
         cartCounter.textContent = cart.length;
         
+        // Zapewnia, że po dodaniu elementu widok przeskoczy do sekcji Zamówienie
         document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
     }
 
@@ -199,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 (position) => {
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
-                    const mapUrl = `https://www.google.com/maps/search/?api=1&query=$?q=${lat},${lon}`; // Poprawiony URL mapy
+                    const mapUrl = `https://www.google.com/maps/search/?api=1&query=$?q=${lat},${lon}`; 
                     locationLink.value = mapUrl; 
                 },
                 (error) => {
@@ -243,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Dodatkowe opóźnienie, aby dać czas na przetworzenie preloadera
         setTimeout(() => {
             document.body.classList.add('loaded');
-            // DODANY KOD: Wymuszenie przewinięcia na sam szczyt
+            // Wymuszenie przewinięcia na sam szczyt
             window.scrollTo(0, 0); 
         }, 500);
     });
