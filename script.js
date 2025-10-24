@@ -51,8 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.textContent = 'Dodano!';
             e.target.style.backgroundColor = '#28a745'; // Zielony kolor potwierdzenia
             setTimeout(() => {
+                // Turkusowy kolor powrotny (nowoczesny)
+                e.target.style.backgroundColor = e.target.closest('.luxury-item') ? 'var(--primary-color)' : 'var(--primary-color)';
                 e.target.textContent = e.target.classList.contains('btn-small') ? 'Dodaj' : 'Dodaj do zamówienia';
-                e.target.style.backgroundColor = ''; // Wróć do oryginalnego koloru
             }, 1200);
         });
     });
@@ -105,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).then(response => {
             if (response.ok) {
                 status.textContent = "Dziękujemy! Twoje zamówienie zostało wysłane.";
-                status.style.color = '#28a745';
+                status.style.color = 'var(--primary-color)';
                 form.reset();
                 cart = [];
                 updateCartDisplay();
