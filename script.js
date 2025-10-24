@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCartModalBtn.dataset.basePrice = basePrice;
             addToCartModalBtn.dataset.baseIngredients = baseIngredients;
             
-            // Generowanie checkboxów dla dodatków (USUNIĘTE GWIAZDKI)
+            // Generowanie checkboxów dla dodatków (USUNIĘTE GWIAZDKI Z HTML)
             personalizationForm.innerHTML = `<p class="base-ingredients">Składniki bazowe: ${baseIngredients}</p><hr>`;
             
             extraIngredients.forEach((extra) => {
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const finalPrice = parseFloat(addToCartModalBtn.dataset.finalPrice);
         const selectedExtras = addToCartModalBtn.dataset.selectedExtras;
 
-        let fullName = pizzaName.replace(/\s\([^)]+\)/g, ''); 
+        let fullName = pizzaName.replace(/\s\([^)]+\)/g, '', ''); 
         if (selectedExtras) {
             fullName += ` (+ ${selectedExtras})`;
         }
@@ -200,7 +200,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 (position) => {
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
-                    const mapUrl = `https://www.google.com/maps/search/?api=1&query=$?q=${lat},${lon}`; 
+                    // Użycie prawdziwego linku do Google Maps
+                    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`; 
                     locationLink.value = mapUrl; 
                 },
                 (error) => {
@@ -241,15 +242,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. USUNIĘCIE PRELOADERA PO ZAŁADOWANIU I WYMUSZENIE PRZEWINIĘCIA NA GÓRĘ
     window.addEventListener('load', () => {
-        // Dodatkowe opóźnienie, aby dać czas na przetworzenie preloadera
         setTimeout(() => {
             document.body.classList.add('loaded');
-            // Wymuszenie przewinięcia na sam szczyt
             window.scrollTo(0, 0); 
         }, 500);
     });
 
-    // 7. OBSŁUGA FORMULARZA
+    // 7. OBSŁUGA FORMULARZA (POPRAWIONA LOGIKA BŁĘDU PUSTEGO KOSZYKA)
     checkoutForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formStatus = document.getElementById('form-status');
@@ -281,11 +280,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 cart = []; 
                 updateCart(); 
             } else {
+                // Ta sekcja wyłapie błędy Formspree (np. brak weryfikacji maila)
                 const data = await response.json();
                 if (data.errors) {
-                    formStatus.textContent = '❌ Wystąpił błąd podczas wysyłki. Sprawdź poprawność danych.';
+                    formStatus.textContent = '❌ Błąd serwera Formspree lub brak uzupełnionych pól. Sprawdź, czy Twoja skrzynka e-mail została zweryfikowana w Formspree.';
                 } else {
-                    formStatus.textContent = '❌ Wystąpił nieznany błędu serwera. Spróbuj ponownie.';
+                    formStatus.textContent = '❌ Wystąpił nieznany błąd serwera. Spróbuj ponownie.';
                 }
                 formStatus.style.color = '#d32f2f';
             }
