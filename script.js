@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 (position) => {
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
-                    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+                    const mapUrl = `https://www.google.com/maps/search/?api=1&query=$?q=${lat},${lon}`; // Poprawiony URL mapy
                     locationLink.value = mapUrl; 
                 },
                 (error) => {
