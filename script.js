@@ -1,236 +1,289 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. GLOBALNE ZMIENNE
+    const preloader = document.getElementById('preloader');
+    const menuItems = document.querySelectorAll('.menu-item');
+    const cartItemsList = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    const cartCounter = document.getElementById('cart-counter');
+    const checkoutForm = document.getElementById('checkout-form');
+    const orderSummaryHidden = document.getElementById('order-summary-hidden');
+    const sections = document.querySelectorAll('.content-section');
+    const themeToggle = document.getElementById('theme-toggle');
 
-    // KRYTYCZNA POPRAWKA PRELOADERA: Ustawienie timera bezpieczeństwa.
-    // Jeśli strona załaduje się szybko, preloader jest ukrywany natychmiast.
-    // Jeśli loader się nie rusza, timer wymusi jego zniknięcie po 0.5 sekundy.
-    const preloaderElement = document.getElementById('preloader');
+    let cart = [];
+    const extraIngredients = [
+        { name: "Ser - Dodatkowa Mozzarella (8 zł)", price: 8 },
+        { name: "Mięso - Salami Picante (10 zł)", price: 10 },
+        { name: "Warzywa - Oliwa Truflowa (12 zł)", price: 12 },
+        { name: "Warzywa - Świeża Rukola (5 zł)", price: 5 },
+        { name: "Sos - Czosnkowy (3 zł)", price: 3 },
+    ];
     
-    // Zegar bezpieczeństwa na 500ms
-    const safetyTimer = setTimeout(() => {
-        document.body.classList.add('loaded');
-    }, 500);
-
-    // Właściwe zdarzenie ładowania
-    window.addEventListener('load', () => {
-        clearTimeout(safetyTimer); // Anuluj timer bezpieczeństwa, jeśli zdarzenie load się uruchomi
-        document.body.classList.add('loaded');
-    });
-
-    // Ustawienie zmiennej CSS --i dla każdego menu-item do płynnej animacji (Stagger)
-    document.querySelectorAll('.menu-item').forEach((item, index) => {
+    // Ustawienie zmiennej CSS --i dla płynnej animacji menu
+    menuItems.forEach((item, index) => {
         item.style.setProperty('--i', index + 1);
     });
 
-    // --- LOGIKA KOSZYKA ZAMÓWIEŃ Z LICZNIKIEM ---
-    let cart = [];
-    const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartTotalElement = document.getElementById('cart-total');
-    const orderSummaryHidden = document.getElementById('order-summary-hidden');
-    const cartCounter = document.getElementById('cart-counter');
-
-    function updateCartDisplay() {
-        cartItemsContainer.innerHTML = '';
-        
-        if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p>Wybierz pizzę z naszego menu, by dodać ją do zamówienia.</p>';
-            cartCounter.style.display = 'none';
+    // --- FUNKCJA WŁĄCZANIA / WYŁĄCZANIA TRYBU CIEMNEGO ---
+    function toggleTheme() {
+        if (document.body.classList.contains('dark-theme')) {
+            document.body.classList.remove('dark-theme');
+            localStorage.setItem('theme', 'light');
         } else {
-            const ul = document.createElement('ul');
-            cart.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.className = 'cart-item';
-                
-                // Uproszczony opis składników dla koszyka
-                const ingredientsText = item.removed.length > 0 ? 
-                    `<br><small style="color: #E53935; font-style: italic; display: block; margin-top: 3px;">Bez: ${item.removed.join(', ')}</small>` : '';
-
-                li.innerHTML = `
-                    <div style="flex-grow: 1;">
-                        <span style="font-weight: 500;">${item.name}</span>
-                        ${ingredientsText}
-                    </div>
-                    <strong>${item.price.toFixed(2)} zł</strong>
-                `;
-                ul.appendChild(li);
-            });
-            cartItemsContainer.appendChild(ul);
-            cartCounter.textContent = cart.length;
-            cartCounter.style.display = 'inline-block';
+            document.body.classList.add('dark-theme');
+            localStorage.setItem('theme', 'dark');
         }
-
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        cartTotalElement.innerHTML = `<strong>Do zapłaty: ${total.toFixed(2)} zł</strong>`;
-
-        // Generowanie podsumowania dla Formspree
-        const summaryText = cart.map((item, index) => {
-            const removed = item.removed.length > 0 ? ` (Bez: ${item.removed.join(', ')})` : '';
-            return `${index + 1}. ${item.name}${removed} - ${item.price.toFixed(2)} zł`;
-        }).join('\n') + `\n\nSuma: ${total.toFixed(2)} zł`;
-        orderSummaryHidden.value = summaryText;
+    }
+    
+    // Sprawdzenie zapisanego motywu przy ładowaniu
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+    } else {
+        document.body.classList.remove('dark-theme');
     }
 
-    // --- LOGIKA MODALA PERSONALIZACJI ---
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // 2. FUNKCJE KOSZYKA
+    function updateCart() {
+        let total = 0;
+        cartItemsList.innerHTML = '';
+        
+        if (cart.length === 0) {
+            cartItemsList.innerHTML = '<p>Wybierz pizzę z naszego menu, by dodać ją do zamówienia.</p>';
+            orderSummaryHidden.value = "Koszyk jest pusty.";
+        } else {
+            const ul = document.createElement('ul');
+            let summaryText = "--- ZAMÓWIENIE: ---\n";
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                const li = document.createElement('li');
+                
+                // Opis zamówienia na liście
+                const itemName = document.createElement('span');
+                itemName.innerHTML = `${item.name} <small>(${item.price.toFixed(2)} zł)</small>`;
+                
+                // Przycisk usuwania
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Usuń';
+                removeBtn.classList.add('btn', 'btn-small');
+                removeBtn.style.backgroundColor = '#d32f2f';
+                removeBtn.style.transform = 'none';
+                removeBtn.onclick = () => removeItem(index);
+
+                li.appendChild(itemName);
+                li.appendChild(removeBtn);
+                ul.appendChild(li);
+
+                summaryText += `${index + 1}. ${item.name} (${item.price.toFixed(2)} zł)\n`;
+            });
+            cartItemsList.appendChild(ul);
+            
+            // Aktualizacja ukrytego pola Formspree
+            summaryText += `\n--- DO ZAPŁATY: ${total.toFixed(2)} zł ---\n`;
+            orderSummaryHidden.value = summaryText;
+        }
+
+        cartTotal.innerHTML = `<strong>Do zapłaty: ${total.toFixed(2)} zł</strong>`;
+        cartCounter.textContent = cart.length;
+        
+        // Płynne przewinięcie do sekcji zamówienia
+        document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function removeItem(index) {
+        cart.splice(index, 1);
+        updateCart();
+    }
+
+    // 3. OBSŁUGA MODALA PERSONALIZACJI
     const modal = document.getElementById('details-modal');
-    const closeBtn = document.querySelector('.close-btn');
-    const modalPizzaName = document.getElementById('modal-pizza-name');
-    const modalPizzaPrice = document.getElementById('modal-pizza-price');
+    const closeModalBtn = document.querySelector('.close-btn');
     const personalizationForm = document.getElementById('personalization-form');
     const addToCartModalBtn = document.getElementById('add-to-cart-modal-btn');
     
-    let currentPizza = null; // Przechowuje dane aktualnie wybranej pizzy
-
-    viewDetailsButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            const item = e.target.closest('.menu-item');
-            
-            // Pobieranie danych z atrybutów data-
-            const name = item.dataset.name;
-            const price = parseFloat(item.dataset.price);
-            const ingredientsString = item.dataset.baseIngredients;
-            const ingredientsArray = ingredientsString.split(',').map(s => s.trim());
-            
-            currentPizza = { name, price, ingredients: ingredientsArray };
-
-            // Wypełnianie modala
-            modalPizzaName.textContent = name;
-            modalPizzaPrice.textContent = price.toFixed(2) + ' zł';
-            
-            // Tworzenie checkboxów
-            personalizationForm.innerHTML = '';
-            ingredientsArray.forEach((ing) => {
-                const label = document.createElement('label');
-                label.innerHTML = `
-                    <input type="checkbox" name="ingredient" value="${ing}" checked> 
-                    ${ing}
-                `;
-                personalizationForm.appendChild(label);
-            });
-
-            // Wyświetlanie modala
-            modal.style.display = 'block';
-        });
-    });
-
-    closeBtn.onclick = () => {
-        modal.style.display = 'none';
-    };
-
+    closeModalBtn.onclick = () => modal.style.display = 'none';
     window.onclick = (event) => {
         if (event.target == modal) {
             modal.style.display = 'none';
         }
-    };
-    
-    // Dodawanie spersonalizowanej pizzy do koszyka
+    }
+
+    menuItems.forEach(item => {
+        const detailsBtn = item.querySelector('.view-details-btn');
+        detailsBtn.addEventListener('click', () => {
+            const pizzaId = item.dataset.id;
+            const pizzaName = item.dataset.name;
+            const basePrice = parseFloat(item.dataset.price);
+            const baseIngredients = item.dataset.baseIngredients;
+
+            document.getElementById('modal-pizza-name').textContent = pizzaName;
+            document.getElementById('modal-pizza-price').textContent = `${basePrice.toFixed(2)} zł (Cena bazowa)`;
+            addToCartModalBtn.dataset.pizzaId = pizzaId;
+            addToCartModalBtn.dataset.basePrice = basePrice;
+            addToCartModalBtn.dataset.baseIngredients = baseIngredients;
+            
+            // Generowanie checkboxów dla dodatków
+            personalizationForm.innerHTML = `<p class="base-ingredients">**Składniki bazowe:** ${baseIngredients}</p><hr>`;
+            
+            extraIngredients.forEach((extra, index) => {
+                const label = document.createElement('label');
+                label.innerHTML = `
+                    <input type="checkbox" name="extra" value="${extra.name}" data-price="${extra.price}">
+                    ${extra.name}
+                `;
+                personalizationForm.appendChild(label);
+            });
+
+            // Aktualizacja ceny w modalu na podstawie wybranych dodatków
+            personalizationForm.onchange = () => {
+                let currentPrice = basePrice;
+                let selectedExtras = [];
+                personalizationForm.querySelectorAll('input[name="extra"]:checked').forEach(checkbox => {
+                    currentPrice += parseFloat(checkbox.dataset.price);
+                    selectedExtras.push(checkbox.value.split(' (')[0]);
+                });
+
+                document.getElementById('modal-pizza-price').textContent = `${currentPrice.toFixed(2)} zł (Finalna cena)`;
+                addToCartModalBtn.dataset.finalPrice = currentPrice.toFixed(2);
+                addToCartModalBtn.dataset.selectedExtras = selectedExtras.join(', ');
+            };
+
+            // Ustawienie ceny początkowej i zerowanie dodatków
+            document.getElementById('modal-pizza-price').textContent = `${basePrice.toFixed(2)} zł (Finalna cena)`;
+            addToCartModalBtn.dataset.finalPrice = basePrice.toFixed(2);
+            addToCartModalBtn.dataset.selectedExtras = '';
+
+            modal.style.display = 'block';
+        });
+    });
+
     addToCartModalBtn.addEventListener('click', () => {
-        const removedIngredients = [];
-        const checkboxes = personalizationForm.querySelectorAll('input[type="checkbox"]');
-        
-        checkboxes.forEach(checkbox => {
-            if (!checkbox.checked) {
-                removedIngredients.push(checkbox.value);
-            }
-        });
+        const pizzaName = document.getElementById('modal-pizza-name').textContent;
+        const finalPrice = parseFloat(addToCartModalBtn.dataset.finalPrice);
+        const selectedExtras = addToCartModalBtn.dataset.selectedExtras;
 
-        // Dodanie spersonalizowanej pizzy do koszyka
-        cart.push({
-            name: currentPizza.name,
-            price: currentPizza.price,
-            removed: removedIngredients
-        });
-
-        updateCartDisplay();
-        modal.style.display = 'none';
-        
-        // Wizualne potwierdzenie (Płynne przejście koloru)
-        const btn = document.querySelector(`.menu-item[data-name="${currentPizza.name}"] .view-details-btn`);
-        if (btn) {
-            const originalText = btn.textContent;
-            const originalBg = btn.style.backgroundColor;
-            const originalColor = btn.style.color;
-            
-            btn.textContent = 'Dodano!';
-            btn.style.transition = 'background-color 0.4s, color 0.4s';
-            btn.style.backgroundColor = '#28a745'; // Zielone potwierdzenie
-            btn.style.color = '#fff';
-            
-            setTimeout(() => {
-                // Przywrócenie oryginalnych wartości po animacji
-                btn.textContent = originalText;
-                btn.style.backgroundColor = originalBg; 
-                btn.style.color = originalColor;
-                // Jeśli nie miał ustawionych styli inline, przywróć domyślne z CSS
-                if (!originalBg) btn.style.backgroundColor = 'var(--primary-color)';
-            }, 1200);
+        let fullName = pizzaName.replace(/\s\([^)]+\)/g, ''); // Usuń np. (Pikantna) z nazwy
+        if (selectedExtras) {
+            fullName += ` (+ ${selectedExtras})`;
         }
+
+        cart.push({
+            name: fullName,
+            price: finalPrice
+        });
+        
+        modal.style.display = 'none';
+        updateCart();
     });
 
 
-    // --- ANIMACJE PRZY PRZEWIJANIU ---
-    const sections = document.querySelectorAll('.content-section');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-    sections.forEach(section => observer.observe(section));
-
-    // --- OBSŁUGA FORMULARZA I GEOLOKALIZACJI ---
-    const form = document.getElementById("checkout-form");
-    const status = document.getElementById("form-status");
-    const locationInput = document.getElementById("location-link");
-
+    // 4. GEOLOKALIZACJA
     function getLocation() {
+        const locationLink = document.getElementById('location-link');
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
-                    locationInput.value = `https://www.google.com/maps?q=${lat},${lon}`;
+                    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+                    locationLink.value = mapUrl; // Wysyłanie pinu do Formspree
                 },
-                () => { locationInput.value = "Użytkownik nie udostępnił lokalizacji."; }
+                (error) => {
+                    console.warn('Geolocation error:', error.message);
+                    locationLink.value = 'Lokalizacja: nie udostępniono';
+                },
+                { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
             );
         } else {
-            locationInput.value = "Geolokalizacja niewspierana.";
+            locationLink.value = 'Lokalizacja: nieobsługiwana przez przeglądarkę';
         }
     }
+    
+    // Pobranie lokalizacji przy wejściu na stronę, aby była gotowa przy zamówieniu
     getLocation();
 
-    async function handleSubmit(event) {
-        event.preventDefault();
+
+    // 5. ANIMACJA SEKCJI PRZY PRZEWIJANIU
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Jeśli to sekcja Menu, uruchom animację stagger dla elementów
+                if (entry.target.id === 'menu') {
+                    const menuItems = entry.target.querySelectorAll('.menu-item');
+                    menuItems.forEach(item => {
+                        item.style.animationPlayState = 'running';
+                    });
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1 // Uruchom, gdy 10% sekcji jest widoczne
+    });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    // 6. USUNIĘCIE PRELOADERA PO ZAŁADOWANIU
+    window.addEventListener('load', () => {
+        // Opóźnienie, aby animacja ładowania trwała minimum 0.5s
+        setTimeout(() => {
+            document.body.classList.add('loaded');
+        }, 500);
+    });
+
+    // 7. OBSŁUGA FORMULARZA
+    checkoutForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formStatus = document.getElementById('form-status');
+        
         if (cart.length === 0) {
-            status.textContent = "Twój koszyk jest pusty!";
-            status.style.color = '#E53935';
+            formStatus.textContent = "❌ Koszyk jest pusty! Dodaj pizzę, aby złożyć zamówienie.";
+            formStatus.style.color = '#d32f2f';
             return;
         }
 
-        const data = new FormData(event.target);
-        fetch(event.target.action, {
-            method: form.method,
-            body: data,
-            headers: { 'Accept': 'application/json' }
-        }).then(response => {
-            if (response.ok) {
-                status.textContent = "Dziękujemy! Twoje zamówienie zostało wysłane.";
-                status.style.color = 'var(--primary-color)';
-                form.reset();
-                cart = [];
-                updateCartDisplay();
-            } else {
-                response.json().then(data => {
-                    status.textContent = data.errors ? data.errors.map(e => e.message).join(", ") : "Oops! Coś poszło nie tak.";
-                    status.style.color = '#E53935';
-                });
-            }
-        }).catch(error => {
-            status.textContent = "Oops! Wystąpił błąd sieci. Spróbuj ponownie.";
-            status.style.color = '#E53935';
-        });
-    }
-    form.addEventListener("submit", handleSubmit);
+        formStatus.textContent = "Wysyłanie zamówienia...";
+        formStatus.style.color = 'var(--primary-color)';
 
-    updateCartDisplay(); // Inicjalizacja widoku koszyka
+        // Formspree używa FormData
+        const formData = new FormData(checkoutForm);
+
+        try {
+            const response = await fetch(checkoutForm.action, {
+                method: checkoutForm.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                formStatus.textContent = "✅ Zamówienie przyjęte! Dziękujemy. Zostaniesz o nim poinformowany telefonicznie.";
+                formStatus.style.color = 'var(--primary-color)';
+                checkoutForm.reset();
+                cart = []; // Czyszczenie koszyka
+                updateCart(); 
+            } else {
+                const data = await response.json();
+                if (data.errors) {
+                    formStatus.textContent = '❌ Wystąpił błąd podczas wysyłki. Sprawdź poprawność danych.';
+                } else {
+                    formStatus.textContent = '❌ Wystąpił nieznany błąd serwera. Spróbuj ponownie.';
+                }
+                formStatus.style.color = '#d32f2f';
+            }
+        } catch (error) {
+            formStatus.textContent = '❌ Wystąpił błąd sieci. Sprawdź połączenie internetowe.';
+            formStatus.style.color = '#d32f2f';
+        }
+    });
+
+    // Inicjalizacja koszyka na start
+    updateCart(); 
 });
