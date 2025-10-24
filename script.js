@@ -1,7 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. NAPRAWA PRELOADERA: Upewnienie się, że klasa jest dodawana
+    // KRYTYCZNA POPRAWKA PRELOADERA: Ustawienie timera bezpieczeństwa.
+    // Jeśli strona załaduje się szybko, preloader jest ukrywany natychmiast.
+    // Jeśli loader się nie rusza, timer wymusi jego zniknięcie po 0.5 sekundy.
+    const preloaderElement = document.getElementById('preloader');
+    
+    // Zegar bezpieczeństwa na 500ms
+    const safetyTimer = setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 500);
+
+    // Właściwe zdarzenie ładowania
     window.addEventListener('load', () => {
+        clearTimeout(safetyTimer); // Anuluj timer bezpieczeństwa, jeśli zdarzenie load się uruchomi
         document.body.classList.add('loaded');
     });
 
@@ -145,9 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.style.color = '#fff';
             
             setTimeout(() => {
+                // Przywrócenie oryginalnych wartości po animacji
                 btn.textContent = originalText;
-                btn.style.backgroundColor = originalBg;
+                btn.style.backgroundColor = originalBg; 
                 btn.style.color = originalColor;
+                // Jeśli nie miał ustawionych styli inline, przywróć domyślne z CSS
+                if (!originalBg) btn.style.backgroundColor = 'var(--primary-color)';
             }, 1200);
         }
     });
