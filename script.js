@@ -1,3 +1,9 @@
+// NOWY KOD DO PRE-LOADERA
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+});
+
+// Reszta kodu zostaje bez zmian
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- LOGIKA KOSZYKA ZAMÓWIEŃ Z LICZNIKIEM ---
@@ -52,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // --- ANIMACJE PRZY PRZEWIJANIU ---
-    // Ten kod jest OK, będzie działał z nowym CSS
     const sections = document.querySelectorAll('.content-section');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
