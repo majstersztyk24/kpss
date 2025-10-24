@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCartModalBtn.dataset.basePrice = basePrice;
             addToCartModalBtn.dataset.baseIngredients = baseIngredients;
             
-            // Generowanie checkboxów dla dodatków
-            personalizationForm.innerHTML = `<p class="base-ingredients">**Składniki bazowe:** ${baseIngredients}</p><hr>`;
+            // Generowanie checkboxów dla dodatków (USUNIĘTE GWIAZDKI)
+            personalizationForm.innerHTML = `<p class="base-ingredients">Składniki bazowe: ${baseIngredients}</p><hr>`;
             
             extraIngredients.forEach((extra) => {
                 const label = document.createElement('label');
