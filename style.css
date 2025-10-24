@@ -99,7 +99,7 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
     transform: translateY(40px);
     transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1), transform 1.0s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.5s;
 }
-#about, #order, #highlights { background-color: var(--light-bg); }
+#about, #order, #highlights, #contact { background-color: var(--light-bg); }
 #menu { background-color: var(--menu-section-bg); } 
 
 .content-section.visible { opacity: 1; transform: translateY(0); }
@@ -228,11 +228,11 @@ nav a:hover {
 .theme-switch input:checked + .slider .fa-moon { opacity: 1; }
 
 
-/* --- HERO SECTION (ZMIENIONA WYSOKOŚĆ I ZDJĘCIE) --- */
+/* --- HERO SECTION (ZMNIEJSZONA WYSOKOŚĆ) --- */
 #hero {
     height: 55vh; /* ZMNIEJSZONA WYSOKOŚĆ SEKCJI HERO */
     /* Zmieniono na inny obraz, aby tekst był bardziej czytelny na obrazie pizzy */
-    background: url('https://images.unsplash.com/photo-1541781774459-fb2a64491707?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover; 
+    background: url('https://images.unsplash.com/photo-1541781774459-fb2a64491707?q=80&w=2070&auto=format&fit=cover') no-repeat center center/cover; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -294,19 +294,27 @@ nav a:hover {
 #new-banner i { margin: 0 8px; }
 
 
-/* --- SEKCJA O NAS --- */
+/* --- SEKCJA O NAS (NAPRAWIONE ZDJĘCIE) --- */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: center;
 }
-.about-image img {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
+/* KONTENER OBRAZKA - GWARANTUJE MAŁY ROZMIAR ZDJĘCIA */
+.about-image {
+    max-width: 500px; /* Maksymalna szerokość dla obrazka */
+    height: 350px; /* Stała wysokość kontenera */
+    margin: 0 auto; /* Wyśrodkowanie obrazka */
+    overflow: hidden; /* Ukrywa nadmiar, jeśli jest */
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.about-image img {
+    width: 100%; /* Obrazek wypełnia szerokość kontenera */
+    height: 100%; /* Obrazek wypełnia wysokość kontenera */
+    object-fit: cover; /* Ważne: Zapewnia, że obrazek wypełni kontener bez deformacji */
+    display: block;
 }
 .about-subtitle {
     color: var(--secondary-color);
@@ -587,6 +595,8 @@ footer p { transition: color 0.5s; }
     .hero-content p { font-size: 1.2rem; }
     .section-title { font-size: 2.5rem; }
     .about-grid { grid-template-columns: 1fr; }
+    /* W trybie mobilnym chcemy, aby obrazek wypełniał 100% szerokości, ale miał ograniczoną wysokość */
+    .about-image { max-width: 100%; height: 300px; } 
     .order-layout { grid-template-columns: 1fr; }
     .review-grid { grid-template-columns: 1fr; }
     .modal-content { width: 95%; margin: 3% auto; }
