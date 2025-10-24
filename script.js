@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.errors) {
                     formStatus.textContent = '❌ Wystąpił błąd podczas wysyłki. Sprawdź poprawność danych.';
                 } else {
-                    formStatus.textContent = '❌ Wystąpił nieznany błąd serwera. Spróbuj ponownie.';
+                    formStatus.textContent = '❌ Wystąpił nieznany błędu serwera. Spróbuj ponownie.';
                 }
                 formStatus.style.color = '#d32f2f';
             }
