@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkoutForm = document.getElementById('checkout-form');
     const orderSummaryHidden = document.getElementById('order-summary-hidden');
     const sections = document.querySelectorAll('.content-section');
-    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Nowy element do przełączania motywu
+    const themeToggleCheckbox = document.getElementById('theme-toggle-checkbox');
 
     let cart = [];
     const extraIngredients = [
@@ -25,27 +27,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- FUNKCJA WŁĄCZANIA / WYŁĄCZANIA TRYBU CIEMNEGO ---
-    function toggleTheme() {
-        if (document.body.classList.contains('dark-theme')) {
-            document.body.classList.remove('dark-theme');
-            localStorage.setItem('theme', 'light');
-        } else {
+    function applyTheme(theme) {
+        if (theme === 'dark') {
             document.body.classList.add('dark-theme');
-            localStorage.setItem('theme', 'dark');
+            themeToggleCheckbox.checked = true;
+        } else {
+            document.body.classList.remove('dark-theme');
+            themeToggleCheckbox.checked = false;
         }
+        localStorage.setItem('theme', theme);
     }
     
-    // Sprawdzenie zapisanego motywu przy ładowaniu
+    // Inicjalizacja motywu przy ładowaniu
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
+    if (savedTheme) {
+        applyTheme(savedTheme);
     } else {
-        document.body.classList.remove('dark-theme');
+        // Domyślnie użyj motywu 'light' z CSS
+        applyTheme('light'); 
     }
 
-    themeToggle.addEventListener('click', toggleTheme);
+    // Listener dla suwaka
+    themeToggleCheckbox.addEventListener('change', () => {
+        if (themeToggleCheckbox.checked) {
+            applyTheme('dark');
+        } else {
+            applyTheme('light');
+        }
+    });
 
-    // 2. FUNKCJE KOSZYKA
+
+    // 2. FUNKCJE KOSZYKA (Bez zmian, działa poprawnie)
     function updateCart() {
         let total = 0;
         cartItemsList.innerHTML = '';
@@ -89,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cartTotal.innerHTML = `<strong>Do zapłaty: ${total.toFixed(2)} zł</strong>`;
         cartCounter.textContent = cart.length;
         
-        // Płynne przewinięcie do sekcji zamówienia
         document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
     }
 
@@ -98,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCart();
     }
 
-    // 3. OBSŁUGA MODALA PERSONALIZACJI
+    // 3. OBSŁUGA MODALA PERSONALIZACJI (Bez zmian, działa poprawnie)
     const modal = document.getElementById('details-modal');
     const closeModalBtn = document.querySelector('.close-btn');
     const personalizationForm = document.getElementById('personalization-form');
@@ -128,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Generowanie checkboxów dla dodatków
             personalizationForm.innerHTML = `<p class="base-ingredients">**Składniki bazowe:** ${baseIngredients}</p><hr>`;
             
-            extraIngredients.forEach((extra, index) => {
+            extraIngredients.forEach((extra) => {
                 const label = document.createElement('label');
                 label.innerHTML = `
                     <input type="checkbox" name="extra" value="${extra.name}" data-price="${extra.price}">
@@ -165,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const finalPrice = parseFloat(addToCartModalBtn.dataset.finalPrice);
         const selectedExtras = addToCartModalBtn.dataset.selectedExtras;
 
-        let fullName = pizzaName.replace(/\s\([^)]+\)/g, ''); // Usuń np. (Pikantna) z nazwy
+        let fullName = pizzaName.replace(/\s\([^)]+\)/g, ''); 
         if (selectedExtras) {
             fullName += ` (+ ${selectedExtras})`;
         }
@@ -180,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // 4. GEOLOKALIZACJA
+    // 4. GEOLOKALIZACJA (Bez zmian, działa poprawnie)
     function getLocation() {
         const locationLink = document.getElementById('location-link');
         if (navigator.geolocation) {
@@ -189,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const lat = position.coords.latitude;
                     const lon = position.coords.longitude;
                     const mapUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
-                    locationLink.value = mapUrl; // Wysyłanie pinu do Formspree
+                    locationLink.value = mapUrl; 
                 },
                 (error) => {
                     console.warn('Geolocation error:', error.message);
@@ -202,16 +213,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Pobranie lokalizacji przy wejściu na stronę, aby była gotowa przy zamówieniu
     getLocation();
 
 
-    // 5. ANIMACJA SEKCJI PRZY PRZEWIJANIU
+    // 5. ANIMACJA SEKCJI PRZY PRZEWIJANIU (Bez zmian, działa poprawnie)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Jeśli to sekcja Menu, uruchom animację stagger dla elementów
                 if (entry.target.id === 'menu') {
                     const menuItems = entry.target.querySelectorAll('.menu-item');
                     menuItems.forEach(item => {
@@ -222,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, {
-        threshold: 0.1 // Uruchom, gdy 10% sekcji jest widoczne
+        threshold: 0.1 
     });
 
     sections.forEach(section => {
@@ -231,13 +240,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. USUNIĘCIE PRELOADERA PO ZAŁADOWANIU
     window.addEventListener('load', () => {
-        // Opóźnienie, aby animacja ładowania trwała minimum 0.5s
         setTimeout(() => {
             document.body.classList.add('loaded');
         }, 500);
     });
 
-    // 7. OBSŁUGA FORMULARZA
+    // 7. OBSŁUGA FORMULARZA (Bez zmian, działa poprawnie)
     checkoutForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formStatus = document.getElementById('form-status');
@@ -251,7 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
         formStatus.textContent = "Wysyłanie zamówienia...";
         formStatus.style.color = 'var(--primary-color)';
 
-        // Formspree używa FormData
         const formData = new FormData(checkoutForm);
 
         try {
@@ -267,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 formStatus.textContent = "✅ Zamówienie przyjęte! Dziękujemy. Zostaniesz o nim poinformowany telefonicznie.";
                 formStatus.style.color = 'var(--primary-color)';
                 checkoutForm.reset();
-                cart = []; // Czyszczenie koszyka
+                cart = []; 
                 updateCart(); 
             } else {
                 const data = await response.json();
@@ -284,6 +291,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Inicjalizacja koszyka na start
     updateCart(); 
 });
