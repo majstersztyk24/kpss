@@ -1,14 +1,13 @@
-// NOWY KOD DO PRE-LOADERA
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-});
-
-// Reszta kodu zostaje bez zmian
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Ustawienie zmiennej CSS --i dla każdego menu-item do płynnej animacji (Stagger)
+    document.querySelectorAll('.menu-item').forEach((item, index) => {
+        item.style.setProperty('--i', index + 1);
+    });
 
     // --- LOGIKA KOSZYKA ZAMÓWIEŃ Z LICZNIKIEM ---
     let cart = [];
-    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
     const cartItemsContainer = document.getElementById('cart-items');
     const cartTotalElement = document.getElementById('cart-total');
     const orderSummaryHidden = document.getElementById('order-summary-hidden');
@@ -22,9 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
             cartCounter.style.display = 'none';
         } else {
             const ul = document.createElement('ul');
-            cart.forEach(item => {
+            cart.forEach((item, index) => {
                 const li = document.createElement('li');
-                li.innerHTML = `<span>${item.name}</span> <strong>${item.price.toFixed(2)} zł</strong>`;
+                li.className = 'cart-item';
+                
+                // Uproszczony opis składników dla koszyka
+                const ingredientsText = item.removed.length > 0 ? 
+                    ` (Bez: ${item.removed.join(', ')})` : '';
+
+                li.innerHTML = `
+                    <span>${index + 1}. ${item.name}</span>
+                    <small style="color: #666; font-style: italic;">${ingredientsText}</small>
+                    <strong>${item.price.toFixed(2)} zł</strong>
+                `;
                 ul.appendChild(li);
             });
             cartItemsContainer.appendChild(ul);
@@ -35,29 +44,102 @@ document.addEventListener('DOMContentLoaded', () => {
         const total = cart.reduce((sum, item) => sum + item.price, 0);
         cartTotalElement.innerHTML = `<strong>Do zapłaty: ${total.toFixed(2)} zł</strong>`;
 
-        const summaryText = cart.map(item => `${item.name} - ${item.price.toFixed(2)} zł`).join('\n') + `\n\nSuma: ${total.toFixed(2)} zł`;
+        // Generowanie podsumowania dla Formspree
+        const summaryText = cart.map((item, index) => {
+            const removed = item.removed.length > 0 ? ` (Bez: ${item.removed.join(', ')})` : '';
+            return `${index + 1}. ${item.name}${removed} - ${item.price.toFixed(2)} zł`;
+        }).join('\n') + `\n\nSuma: ${total.toFixed(2)} zł`;
         orderSummaryHidden.value = summaryText;
     }
 
-    addToCartButtons.forEach(button => {
+    // --- LOGIKA MODALA PERSONALIZACJI ---
+    const modal = document.getElementById('details-modal');
+    const closeBtn = document.querySelector('.close-btn');
+    const modalPizzaName = document.getElementById('modal-pizza-name');
+    const modalPizzaPrice = document.getElementById('modal-pizza-price');
+    const personalizationForm = document.getElementById('personalization-form');
+    const addToCartModalBtn = document.getElementById('add-to-cart-modal-btn');
+    
+    let currentPizza = null; // Przechowuje dane aktualnie wybranej pizzy
+
+    viewDetailsButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const name = e.target.dataset.name;
-            const price = parseFloat(e.target.dataset.price);
+            const item = e.target.closest('.menu-item');
             
-            cart.push({ name, price });
-            updateCartDisplay();
+            // Pobieranie danych z atrybutów data-
+            const name = item.dataset.name;
+            const price = parseFloat(item.dataset.price);
+            const ingredientsString = item.dataset.baseIngredients;
+            const ingredientsArray = ingredientsString.split(',').map(s => s.trim());
             
-            e.target.textContent = 'Dodano!';
-            e.target.style.backgroundColor = '#28a745'; // Zielony kolor potwierdzenia
-            setTimeout(() => {
-                // Turkusowy kolor powrotny (nowoczesny)
-                e.target.style.backgroundColor = e.target.closest('.luxury-item') ? 'var(--primary-color)' : 'var(--primary-color)';
-                e.target.textContent = e.target.classList.contains('btn-small') ? 'Dodaj' : 'Dodaj do zamówienia';
-            }, 1200);
+            currentPizza = { name, price, ingredients: ingredientsArray };
+
+            // Wypełnianie modala
+            modalPizzaName.textContent = name;
+            modalPizzaPrice.textContent = price.toFixed(2) + ' zł';
+            
+            // Tworzenie checkboxów
+            personalizationForm.innerHTML = '';
+            ingredientsArray.forEach((ing, index) => {
+                const label = document.createElement('label');
+                label.innerHTML = `
+                    <input type="checkbox" name="ingredient" value="${ing}" checked> 
+                    ${ing}
+                `;
+                personalizationForm.appendChild(label);
+            });
+
+            // Wyświetlanie modala
+            modal.style.display = 'block';
         });
     });
+
+    closeBtn.onclick = () => {
+        modal.style.display = 'none';
+    };
+
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    };
     
+    // Dodawanie spersonalizowanej pizzy do koszyka
+    addToCartModalBtn.addEventListener('click', () => {
+        const removedIngredients = [];
+        const checkboxes = personalizationForm.querySelectorAll('input[type="checkbox"]');
+        
+        checkboxes.forEach(checkbox => {
+            if (!checkbox.checked) {
+                removedIngredients.push(checkbox.value);
+            }
+        });
+
+        // Dodanie spersonalizowanej pizzy do koszyka
+        cart.push({
+            name: currentPizza.name,
+            price: currentPizza.price,
+            removed: removedIngredients
+        });
+
+        updateCartDisplay();
+        modal.style.display = 'none';
+        
+        // Wizualne potwierdzenie (opcjonalne, ale fajne)
+        const btn = document.querySelector(`.menu-item[data-name="${currentPizza.name}"] .view-details-btn`);
+        if (btn) {
+            btn.textContent = 'Dodano!';
+            btn.style.backgroundColor = '#28a745';
+            btn.style.color = '#fff';
+            setTimeout(() => {
+                btn.textContent = 'Personalizuj';
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
+            }, 1200);
+        }
+    });
+
+
     // --- ANIMACJE PRZY PRZEWIJANIU ---
     const sections = document.querySelectorAll('.content-section');
     const observer = new IntersectionObserver((entries) => {
@@ -94,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         if (cart.length === 0) {
             status.textContent = "Twój koszyk jest pusty!";
-            status.style.color = '#f39c12';
+            status.style.color = '#E53935';
             return;
         }
 
@@ -113,12 +195,12 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 response.json().then(data => {
                     status.textContent = data.errors ? data.errors.map(e => e.message).join(", ") : "Oops! Coś poszło nie tak.";
-                    status.style.color = 'red';
+                    status.style.color = '#E53935';
                 });
             }
         }).catch(error => {
             status.textContent = "Oops! Wystąpił błąd sieci. Spróbuj ponownie.";
-            status.style.color = 'red';
+            status.style.color = '#E53935';
         });
     }
     form.addEventListener("submit", handleSubmit);
