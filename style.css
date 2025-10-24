@@ -1,11 +1,11 @@
 /* --- ZMIENNE I PODSTAWOWE STYLE --- */
 :root {
-    --primary-color: #D4AF37; /* Bogatszy złoty kolor */
+    --primary-color: #D4AF37;
     --dark-bg: #121212;
     --light-bg: #1E1E1E;
     --text-color: #e0e0e0;
-    --heading-font: 'Cormorant Garamond', serif; /* NOWA CZCIONKA */
-    --body-font: 'Lato', sans-serif; /* NOWA CZCIONKA */
+    --heading-font: 'Cormorant Garamond', serif;
+    --body-font: 'Lato', sans-serif;
     --border-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -17,8 +17,8 @@ body {
     font-family: var(--body-font);
     background-color: var(--dark-bg);
     color: var(--text-color);
-    line-height: 1.7; /* ZMIANA */
-    font-size: 17px; /* WIĘKSZA CZCIONKA BAZOWA */
+    line-height: 1.7;
+    font-size: 17px;
 }
 
 h1, h2, h3, h4 {
@@ -30,15 +30,56 @@ h1, h2, h3, h4 {
 
 .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
 
-.section-title { text-align: center; font-size: 3rem; margin-bottom: 1.5rem; color: var(--primary-color); }
+/* UPISZKNIONE TYTUŁY SEKCJI */
+.section-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem; /* Zwiększony margines na dekorator */
+    color: var(--primary-color);
+    position: relative;
+}
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary-color);
+    opacity: 0.4;
+    margin: 1.5rem auto 0 auto;
+}
+/* Poprawka dla tytułów w gridzie */
+.about-text .section-title, 
+.special-details .section-title {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+.about-text .section-title::after, 
+.special-details .section-title::after {
+    margin-left: 0;
+}
 
+
+/* ZMIANA LOGIKI ANIMACJI SCROLL */
 .content-section {
-    padding: 80px 0; /* MNIEJSZE ODSTĘPY */
+    padding: 80px 0;
+}
+
+/* Animacja dla prostych sekcji (O nas, Pizza, Zamówienie, Kontakt) */
+#about, #special, #order, #contact {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
-.content-section.visible { opacity: 1; transform: translateY(0); }
+#about.visible, #special.visible, #order.visible, #contact.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Sekcje Menu i Galeria nie animują się w całości, tylko ich dzieci */
+#menu.visible, #gallery.visible {
+    opacity: 1;
+}
+
 
 .btn {
     display: inline-block;
@@ -56,13 +97,32 @@ h1, h2, h3, h4 {
     letter-spacing: 0.5px;
 }
 .btn:hover {
-    background-color: var(--primary-color); /* ŁADNIEJSZY HOVER */
-    filter: brightness(1.2); /* ROZJAŚNIENIE */
+    background-color: var(--primary-color);
+    filter: brightness(1.2);
     color: #000;
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 .btn-small { padding: 10px 25px; }
+
+
+/* --- DEFINICJE ANIMACJI (KEYFRAMES) --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseShadow {
+    0% { box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
+    50% { box-shadow: 0 10px 50px rgba(212, 175, 55, 0.5); }
+    100% { box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
+}
+
 
 /* --- NAGŁÓWEK --- */
 header {
@@ -100,10 +160,10 @@ nav a:hover::after { width: 100%; }
     position: relative;
     top: -8px;
     right: -3px;
-    display: none; /* Ukryty na starcie */
+    display: none;
 }
 
-/* --- SEKCJA HERO --- */
+/* --- SEKCJA HERO Z ANIMACJAMI --- */
 #hero {
     height: 95vh;
     background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?q=80&w=1974&auto=format&fit=crop') no-repeat center center/cover;
@@ -113,25 +173,61 @@ nav a:hover::after { width: 100%; }
 .hero-content h1 { font-size: 4.5rem; margin-bottom: 1rem; text-shadow: 0 0 30px rgba(0,0,0,0.8); }
 .hero-content p { font-size: 1.5rem; font-weight: 300; margin-bottom: 2rem; max-width: 700px; }
 
-/* --- O NAS - POPRAWIONY LAYOUT --- */
+/* Klasy do animacji HERO */
+.hero-content h1, .hero-content p, .hero-content .btn {
+    opacity: 0; /* Ukryte na starcie */
+}
+.animate-hero-1 { animation: fadeInUp 0.8s 0.3s ease-out forwards; }
+.animate-hero-2 { animation: fadeInUp 0.8s 0.6s ease-out forwards; }
+.animate-hero-3 { animation: fadeInUp 0.8s 0.9s ease-out forwards; }
+
+
+/* --- NOWY BANER INFORMACYJNY --- */
+#new-banner {
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+    padding: 1.5rem 0;
+    text-align: center;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    animation: fadeIn 1s 1.5s ease-out forwards;
+    opacity: 0; /* Ukryty na starcie */
+}
+#new-banner .fa-star {
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 0 10px;
+    transform: translateY(-2px);
+}
+#new-banner .banner-address {
+    font-size: 1rem;
+    font-family: var(--body-font);
+    font-weight: 400;
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+
+/* --- O NAS --- */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
 }
-.about-text .section-title { text-align: left; }
 .about-text p { font-size: 1.1rem; }
 .about-image img {
     width: 100%;
-    max-width: 450px; /* MNIEJSZE ZDJĘCIE */
+    max-width: 450px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    justify-self: center; /* DODANE WYŚRODKOWANIE */
+    justify-self: center;
 }
 
-/* --- PIZZA MIESIĄCA - POPRAWIONY LAYOUT --- */
+/* --- PIZZA MIESIĄCA Z PULSUJĄCYM ZDJĘCIEM --- */
 #special { background-color: var(--light-bg); }
 .special-offer {
     display: grid;
@@ -139,17 +235,17 @@ nav a:hover::after { width: 100%; }
     gap: 4rem;
     align-items: center;
 }
-.special-details .section-title { text-align: left; font-size: 2.5rem; }
 .special-details h3 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; }
 .special-details .price { font-size: 2rem; font-weight: bold; display: block; margin: 1.5rem 0; }
 .special-image img {
     width: 100%;
-    max-width: 450px; /* MNIEJSZE ZDJĘCIE */
+    max-width: 450px;
     border-radius: 10px;
-    justify-self: center; /* DODANE WYŚRODKOWANIE */
+    justify-self: center;
+    animation: pulseShadow 4s infinite ease-in-out; /* DODANA ANIMACJA */
 }
 
-/* --- MENU --- */
+/* --- MENU Z ANIMACJĄ STAGGER --- */
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -162,29 +258,59 @@ nav a:hover::after { width: 100%; }
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
     border: 1px solid var(--border-color);
+    
+    /* Ustawienia animacji STAGGER */
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+    animation-play-state: paused;
 }
+/* Uruchomienie animacji po kolei, gdy sekcja jest widoczna */
+#menu.visible .menu-item:nth-child(1) { animation-delay: 0.1s; animation-play-state: running; }
+#menu.visible .menu-item:nth-child(2) { animation-delay: 0.2s; animation-play-state: running; }
+#menu.visible .menu-item:nth-child(3) { animation-delay: 0.3s; animation-play-state: running; }
+#menu.visible .menu-item:nth-child(4) { animation-delay: 0.4s; animation-play-state: running; }
+/* Można dodać więcej .menu-item:nth-child(5) itd. w razie potrzeby */
+
+
 .menu-item:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.4); border-color: var(--primary-color); }
 .menu-item img {
     width: 100%;
-    height: 200px; /* NIŻSZE ZDJĘCIE */
+    height: 200px;
     object-fit: cover;
 }
 .menu-item-content { padding: 1.5rem; display: flex; flex-direction: column; height: calc(100% - 200px); }
 .menu-item h3 { margin-bottom: 0.5rem; }
 .menu-item p {
-    font-size: 1rem; /* WIĘKSZA CZCIONKA */
+    font-size: 1rem;
     flex-grow: 1;
     color: #aaa;
 }
 .menu-item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
 .menu-item .price { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); }
 
-/* --- GALERIA --- */
+
+/* --- GALERIA Z ANIMACJĄ STAGGER --- */
 .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-.gallery-item { position: relative; overflow: hidden; border-radius: 10px; }
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    
+    /* Ustawienia animacji STAGGER */
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+    animation-play-state: paused;
+}
+/* Uruchomienie animacji po kolei, gdy sekcja jest widoczna */
+#gallery.visible .gallery-item:nth-child(1) { animation-delay: 0.1s; animation-play-state: running; }
+#gallery.visible .gallery-item:nth-child(2) { animation-delay: 0.2s; animation-play-state: running; }
+#gallery.visible .gallery-item:nth-child(3) { animation-delay: 0.3s; animation-play-state: running; }
+#gallery.visible .gallery-item:nth-child(4) { animation-delay: 0.4s; animation-play-state: running; }
+
+
 .gallery-item img {
     width: 100%;
-    height: 220px; /* NIŻSZE ZDJĘCIE */
+    height: 220px;
     object-fit: cover;
     display: block;
     transition: transform 0.4s ease;
@@ -198,7 +324,7 @@ nav a:hover::after { width: 100%; }
 .gallery-item:hover img { transform: scale(1.1); }
 .gallery-item:hover div { opacity: 1; }
 
-/* --- ZAMÓWIENIE - POPRAWIONY FORMULARZ --- */
+/* --- ZAMÓWIENIE --- */
 .order-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
 #cart-summary, #checkout-form { background: var(--light-bg); padding: 2.5rem; border-radius: 10px; }
 #cart-summary h3, #checkout-form h3 { font-size: 1.8rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; display: flex; align-items: center; gap: 10px;}
@@ -228,7 +354,7 @@ footer {
     text-align: center;
     padding: 3rem 0;
     background: #0c0c0c;
-    margin-top: 80px; /* MNIEJSZY ODSTĘP */
+    margin-top: 80px;
     color: #888;
 }
 
@@ -238,8 +364,9 @@ footer {
     .hero-content h1 { font-size: 3.5rem; }
     .about-grid, .special-offer, .order-layout { grid-template-columns: 1fr; }
     .about-image { grid-row: 1; margin-bottom: 2rem; }
-    .about-image img, .special-image img { margin: 0 auto; } /* Centrowanie na mobilce */
+    .about-image img, .special-image img { margin: 0 auto; }
     .about-text .section-title, .special-details .section-title { text-align: center; }
+    .about-text .section-title::after, .special-details .section-title::after { margin: 1.5rem auto 0 auto; }
     .gallery-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -250,5 +377,5 @@ footer {
     .hero-content p { font-size: 1.2rem; }
     .content-section { padding: 60px 0; }
     .gallery-grid { grid-template-columns: 1fr; }
-    .menu-grid { grid-template-columns: 1fr; } /* Lepiej wygląda na 1 kolumnie */
+    .menu-grid { grid-template-columns: 1fr; }
 }
