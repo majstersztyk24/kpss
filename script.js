@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // --- ANIMACJE PRZY PRZEWIJANIU ---
+    // Ten kod jest OK, będzie działał z nowym CSS
     const sections = document.querySelectorAll('.content-section');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
