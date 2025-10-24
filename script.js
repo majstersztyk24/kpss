@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // 2. FUNKCJE KOSZYKA (Bez zmian, działa poprawnie)
+    // 2. FUNKCJE KOSZYKA
     function updateCart() {
         let total = 0;
         cartItemsList.innerHTML = '';
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCart();
     }
 
-    // 3. OBSŁUGA MODALA PERSONALIZACJI (Bez zmian, działa poprawnie)
+    // 3. OBSŁUGA MODALA PERSONALIZACJI
     const modal = document.getElementById('details-modal');
     const closeModalBtn = document.querySelector('.close-btn');
     const personalizationForm = document.getElementById('personalization-form');
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // 4. GEOLOKALIZACJA (Bez zmian, działa poprawnie)
+    // 4. GEOLOKALIZACJA
     function getLocation() {
         const locationLink = document.getElementById('location-link');
         if (navigator.geolocation) {
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
     getLocation();
 
 
-    // 5. ANIMACJA SEKCJI PRZY PRZEWIJANIU (Bez zmian, działa poprawnie)
+    // 5. ANIMACJA SEKCJI PRZY PRZEWIJANIU
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -238,14 +238,17 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
-    // 6. USUNIĘCIE PRELOADERA PO ZAŁADOWANIU
+    // 6. USUNIĘCIE PRELOADERA PO ZAŁADOWANIU I WYMUSZENIE PRZEWINIĘCIA NA GÓRĘ
     window.addEventListener('load', () => {
+        // Dodatkowe opóźnienie, aby dać czas na przetworzenie preloadera
         setTimeout(() => {
             document.body.classList.add('loaded');
+            // DODANY KOD: Wymuszenie przewinięcia na sam szczyt
+            window.scrollTo(0, 0); 
         }, 500);
     });
 
-    // 7. OBSŁUGA FORMULARZA (Bez zmian, działa poprawnie)
+    // 7. OBSŁUGA FORMULARZA
     checkoutForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formStatus = document.getElementById('form-status');
