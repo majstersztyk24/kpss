@@ -124,7 +124,7 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
     cursor: pointer; text-transform: uppercase;
     font-size: 0.95rem; letter-spacing: 1px;
     box-shadow: 0 5px 15px rgba(255, 112, 67, 0.3);
-    text-decoration: none; /* USUNIĘTE PODKREŚLENIE Z PRZYCISKÓW */
+    text-decoration: none; 
 }
 .btn:hover {
     background-color: var(--primary-color); 
@@ -169,6 +169,18 @@ nav a:hover {
     color: var(--secondary-color); 
 }
 
+.cart-icon-wrapper {
+    position: relative;
+    margin-left: 15px;
+}
+.cart-icon-wrapper a {
+    color: var(--text-color);
+    font-size: 1.4rem;
+    transition: color 0.3s;
+}
+.cart-icon-wrapper a:hover {
+    color: var(--primary-color);
+}
 #cart-counter {
     background-color: var(--secondary-color); 
     color: #fff;
@@ -185,6 +197,8 @@ nav a:hover {
     transform: none; 
     margin-left: 2rem; 
     z-index: 10; 
+    display: flex;
+    align-items: center;
 }
 
 .theme-switch input { display: none; }
@@ -238,7 +252,6 @@ nav a:hover {
 /* --- HERO SECTION (NAPRAWIONO TŁO I CZYTELNOŚĆ TEKSTU) --- */
 #hero {
     height: 55vh; 
-    /* Upewnij się, że ten obraz jest widoczny i ma odpowiedni kontrast */
     background: url('https://images.unsplash.com/photo-1541781774459-fb2a64491707?q=80&w=2070&auto=format&fit=cover') no-repeat center center/cover; 
     display: flex;
     justify-content: center;
@@ -249,7 +262,6 @@ nav a:hover {
     overflow: hidden;
 }
 
-/* CAŁKOWICIE USUNIĘTO WARSTWĘ PRZYCIEMNIAJĄCĄ (ZERO SZAROŚCI) */
 #hero::before {
     content: '';
     position: absolute;
@@ -267,7 +279,6 @@ nav a:hover {
     font-size: 5.5rem;
     margin-bottom: 1rem;
     color: #fff;
-    /* WZMOCNIONY CIEŃ TEKSTU dla lepszej czytelności na jasnym zdjęciu */
     text-shadow: 0 0 15px rgba(0,0,0,0.9), 0 0 5px rgba(0,0,0,0.7); 
     animation: fadeInUp 1s ease-out 0.3s forwards;
     opacity: 0;
@@ -285,7 +296,7 @@ nav a:hover {
 .hero-content .btn {
     animation: fadeInUp 1s ease-out 0.9s forwards;
     opacity: 0;
-    text-decoration: none; /* Upewnienie się, że przycisk nie ma podkreślenia */
+    text-decoration: none; 
 }
 
 /* --- NOWY BANNER --- */
@@ -311,19 +322,18 @@ nav a:hover {
     gap: 3rem;
     align-items: center;
 }
-/* KONTENER OBRAZKA - GWARANTUJE MAŁY ROZMIAR ZDJĘCIA */
 .about-image {
-    max-width: 500px; /* Maksymalna szerokość dla obrazka */
-    height: 350px; /* Stała wysokość kontenera */
-    margin: 0 auto; /* Wyśrodkowanie obrazka */
-    overflow: hidden; /* Ukrywa nadmiar, jeśli jest */
+    max-width: 500px; 
+    height: 350px; 
+    margin: 0 auto; 
+    overflow: hidden; 
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 .about-image img {
-    width: 100%; /* Obrazek wypełnia szerokość kontenera */
-    height: 100%; /* Obrazek wypełnia wysokość kontenera */
-    object-fit: cover; /* Ważne: Zapewnia, że obrazek wypełni kontener bez deformacji */
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
     display: block;
 }
 .about-subtitle {
@@ -426,7 +436,7 @@ nav a:hover {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.8s ease-out, background-color 0.5s, border-color 0.5s;
-    border-radius: 10px; /* Dodano brakujący border-radius */
+    border-radius: 10px; 
 }
 #highlights.visible .review-card:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
 #highlights.visible .review-card:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
@@ -605,7 +615,6 @@ footer p { transition: color 0.5s; }
     .hero-content p { font-size: 1.2rem; }
     .section-title { font-size: 2.5rem; }
     .about-grid { grid-template-columns: 1fr; }
-    /* W trybie mobilnym chcemy, aby obrazek wypełniał 100% szerokości, ale miał ograniczoną wysokość */
     .about-image { max-width: 100%; height: 300px; } 
     .order-layout { grid-template-columns: 1fr; }
     .review-grid { grid-template-columns: 1fr; }
