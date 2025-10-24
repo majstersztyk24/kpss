@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // 1. NAPRAWA PRELOADERA: Upewnienie się, że klasa jest dodawana
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+    });
+
     // Ustawienie zmiennej CSS --i dla każdego menu-item do płynnej animacji (Stagger)
     document.querySelectorAll('.menu-item').forEach((item, index) => {
         item.style.setProperty('--i', index + 1);
@@ -27,11 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Uproszczony opis składników dla koszyka
                 const ingredientsText = item.removed.length > 0 ? 
-                    ` (Bez: ${item.removed.join(', ')})` : '';
+                    `<br><small style="color: #E53935; font-style: italic; display: block; margin-top: 3px;">Bez: ${item.removed.join(', ')}</small>` : '';
 
                 li.innerHTML = `
-                    <span>${index + 1}. ${item.name}</span>
-                    <small style="color: #666; font-style: italic;">${ingredientsText}</small>
+                    <div style="flex-grow: 1;">
+                        <span style="font-weight: 500;">${item.name}</span>
+                        ${ingredientsText}
+                    </div>
                     <strong>${item.price.toFixed(2)} zł</strong>
                 `;
                 ul.appendChild(li);
@@ -80,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Tworzenie checkboxów
             personalizationForm.innerHTML = '';
-            ingredientsArray.forEach((ing, index) => {
+            ingredientsArray.forEach((ing) => {
                 const label = document.createElement('label');
                 label.innerHTML = `
                     <input type="checkbox" name="ingredient" value="${ing}" checked> 
@@ -125,16 +132,22 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCartDisplay();
         modal.style.display = 'none';
         
-        // Wizualne potwierdzenie (opcjonalne, ale fajne)
+        // Wizualne potwierdzenie (Płynne przejście koloru)
         const btn = document.querySelector(`.menu-item[data-name="${currentPizza.name}"] .view-details-btn`);
         if (btn) {
+            const originalText = btn.textContent;
+            const originalBg = btn.style.backgroundColor;
+            const originalColor = btn.style.color;
+            
             btn.textContent = 'Dodano!';
-            btn.style.backgroundColor = '#28a745';
+            btn.style.transition = 'background-color 0.4s, color 0.4s';
+            btn.style.backgroundColor = '#28a745'; // Zielone potwierdzenie
             btn.style.color = '#fff';
+            
             setTimeout(() => {
-                btn.textContent = 'Personalizuj';
-                btn.style.backgroundColor = '';
-                btn.style.color = '';
+                btn.textContent = originalText;
+                btn.style.backgroundColor = originalBg;
+                btn.style.color = originalColor;
             }, 1200);
         }
     });
