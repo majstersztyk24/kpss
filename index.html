@@ -3,279 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mięsna 67 - Pizza Rzemieślnicza Premium | Bydgoszcz</title>
+    <title>Mięsna 67 - Rzemieślnicza Pizza</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="light-theme">
+<body>
+
     <div id="preloader">
         <div class="loader-icon"></div>
     </div>
 
     <header>
         <div class="container header-container">
-            
-            <a href="#" class="logo">Mięsna 67</a>
-            
+            <a href="#hero" class="logo">Mięsna 67</a>
             <nav>
                 <a href="#about">O nas</a>
                 <a href="#menu">Menu</a>
-                <a href="#order" class="nav-order-link">Zamów <span id="cart-counter">0</span></a>
+                <a href="#highlights">Opinie</a>
+                <a href="#order">Zamów</a>
                 <a href="#contact">Kontakt</a>
             </nav>
-
             <div class="theme-switch-wrapper">
                 <label class="theme-switch" for="theme-toggle-checkbox">
-                    <input type="checkbox" id="theme-toggle-checkbox">
+                    <input type="checkbox" id="theme-toggle-checkbox" />
                     <div class="slider round">
-                        <i class="fas fa-sun"></i> <i class="fas fa-moon"></i> </div>
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </div>
                 </label>
+                <div class="cart-icon-wrapper">
+                    <a href="#order"><i class="fas fa-shopping-cart"></i></a>
+                    <span id="cart-counter">0</span>
+                </div>
             </div>
         </div>
     </header>
 
-    <main>
-        <section id="hero">
-            <div class="hero-content">
-                <h1 class="animate-hero-1">Rzemieślnicza Pizza. Perfekcja Składników.</h1>
-                <p class="animate-hero-2">Twoje unikalne doznania kulinarne w sercu Bydgoszczy.</p>
-                <a href="#menu" class="btn primary-btn animate-hero-3">Odkryj Menu Premium</a>
-            </div>
-        </section>
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Rzemieślnicza Pizza. Perfekcja Składników.</h1>
+            <p>Twoje unikalne doznania kulinarne w sercu Bydgoszczy.</p>
+            <a href="#menu" class="btn">ODKRYJ MENU PREMIUM</a>
+        </div>
+    </section>
 
-        <section id="new-banner">
-            <div class="container">
-                <p><i class="fas fa-star"></i> Otworzyliśmy się! Nowa pizzeria rzemieślnicza w Bydgoszczy <i class="fas fa-star"></i></p>
-                <p class="banner-address">Zapraszamy na ul. Mięsną 67! Tel: 754 968 294</p>
-            </div>
-        </section>
+    <div id="new-banner">
+        <div class="container">
+            <p><i class="fas fa-map-marker-alt"></i> Nasza nowa lokalizacja: <span class="banner-address">Mięsna 67, Bydgoszcz</span> | Otwieramy od 12:00 do 22:00</p>
+        </div>
+    </div>
 
-        <section id="about" class="container content-section">
-            <h2 class="section-title">Nasza Filozofia</h2>
-            <div class="about-grid">
-                <div class="about-text">
-                    <h3 class="about-subtitle">Sekret Ciasta i Wypieku</h3>
-                    <p>W Mięsnej 67 pizza to rytuał. Nasze ciasto, dojrzewające **72 godziny**, staje się płótnem dla najlepszych składników. Wypiek odbywa się w tradycyjnym piecu opalanym drewnem w temperaturze **450°C** przez zaledwie **90 sekund**. Skład ciasta: włoska mąka 00, woda mineralna, minimalna ilość drożdży (0.1%), sól morska. To jest nasza obietnica jakości.</p>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=80&w=1928&auto=format&fit=crop" alt="Piec do pizzy i składniki">
-                </div>
+    <section id="about" class="content-section">
+        <div class="container about-grid">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=80&w=1928&auto=format&fit=crop" alt="Piec opalany drewnem">
             </div>
-        </section>
-        
-        <section id="menu" class="container content-section">
-            <h2 class="section-title">Rzemieślnicze Menu</h2>
+            <div class="about-text">
+                <h2 class="section-title">O NAS</h2>
+                <h3 class="about-subtitle">Piec, Czas, Tradycja.</h3>
+                <p>W Mięsnej 67 pizza to rytuał. Nasze ciasto, dojrzewające **72 godziny**, staje się płótnem dla najlepszych składników. Wypiek odbywa się w tradycyjnym piecu opalanym drewnem w temperaturze **450°C** przez zaledwie **90 sekund**. Skład ciasta: włoska mąka 00, woda mineralna, minimalna ilość drożdży (0.1%), sól morska. To jest nasza obietnica jakości.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="content-section">
+        <div class="container">
+            <h2 class="section-title">RZEMIEŚLNICZE MENU</h2>
             <div class="menu-grid">
-                <div class="menu-item" data-id="margherita" data-name="Margherita" data-price="32" data-base-ingredients="Sos San Marzano, Mozzarella Fior di latte, Świeża Bazylia, Oliwa EV">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop" alt="Pizza Margherita">
+                <div class="menu-item" data-id="1" data-name="Margherita" data-price="32" data-base-ingredients="Sos San Marzano, mozzarella fior di latte, świeża bazylia, oliwa extra vergine.">
+                    <img src="https://images.unsplash.com/photo-1627889345228-569b91000100?q=80&w=1858&auto=format&fit=crop" alt="Margherita">
                     <div class="menu-item-content">
                         <h3>1. Margherita</h3>
-                        <p>Klasyka, która mówi sama za siebie. Bazylia i San Marzano.</p>
+                        <p>Sos San Marzano, mozzarella fior di latte, świeża bazylia, oliwa extra vergine.</p>
                         <div class="menu-item-footer">
                             <span class="price">32 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
+                            <button class="btn btn-small view-details-btn">PERSONALIZUJ</button>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item" data-id="diavola" data-name="Diavola" data-price="38" data-base-ingredients="Sos San Marzano, Mozzarella, Salami Spianata, Czerwona Cebula, Oliwa Chili">
-                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1981&auto=format&fit=crop" alt="Pizza Diavola">
+
+                <div class="menu-item" data-id="2" data-name="Diavola (Pikantna)" data-price="38" data-base-ingredients="Pikantne salami Spianata Calabrese, Nduja, oliwki Taggiasca.">
+                    <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80aa9b?q=80&w=1887&auto=format&fit=crop" alt="Diavola">
                     <div class="menu-item-content">
                         <h3>2. Diavola (Pikantna)</h3>
-                        <p>Pikantne salami Spianata Calabra - dla odważnych.</p>
-                         <div class="menu-item-footer">
+                        <p>Pikantne salami Spianata Calabrese, Nduja, oliwki Taggiasca – dla odważnych.</p>
+                        <div class="menu-item-footer">
                             <span class="price">38 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
+                            <button class="btn btn-small view-details-btn">PERSONALIZUJ</button>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item" data-id="funghi" data-name="Prosciutto e Funghi" data-price="39" data-base-ingredients="Sos San Marzano, Mozzarella, Szynka Prosciutto Cotto, Świeże Pieczarki">
-                    <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=2070&auto=format&fit=crop" alt="Pizza Prosciutto e Funghi">
+                
+                <div class="menu-item" data-id="3" data-name="Prosciutto e Funghi" data-price="39" data-base-ingredients="Włoska szynka Prosciutto Cotto, świeże pieczarki, mozzarella.">
+                    <img src="https://images.unsplash.com/photo-1565434450392-ce672d63493e?q=80&w=1887&auto=format&fit=crop" alt="Prosciutto e Funghi">
                     <div class="menu-item-content">
                         <h3>3. Prosciutto e Funghi</h3>
                         <p>Włoska szynka Prosciutto Cotto i świeże pieczarki.</p>
-                         <div class="menu-item-footer">
+                        <div class="menu-item-footer">
                             <span class="price">39 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
+                            <button class="btn btn-small view-details-btn">PERSONALIZUJ</button>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item" data-id="formaggi" data-name="Quattro Formaggi" data-price="41" data-base-ingredients="Sos Śmietanowy, Mozzarella, Gorgonzola, Parmezan, Wędzona Scamorza, Orzechy Włoskie">
-                    <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=2069&auto=format&fit=crop" alt="Pizza Cztery Sery">
+
+                <div class="menu-item" data-id="4" data-name="Quattro Formaggi" data-price="41" data-base-ingredients="Kremowy sos z czterech szlachetnych serów: mozzarella, gorgonzola, pecorino, ricotta.">
+                    <img src="https://images.unsplash.com/photo-1589187151025-cd5e72d61741?q=80&w=1887&auto=format&fit=crop" alt="Quattro Formaggi">
                     <div class="menu-item-content">
                         <h3>4. Quattro Formaggi</h3>
-                        <p>Kremowy sos i cztery szlachetne sery, orzechy włoskie.</p>
-                         <div class="menu-item-footer">
+                        <p>Kremowy sos z czterech szlachetnych serów, prawdziwa uczta dla smakoszy.</p>
+                        <div class="menu-item-footer">
                             <span class="price">41 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
+                            <button class="btn btn-small view-details-btn">PERSONALIZUJ</button>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item" data-id="parma" data-name="Parma e Rucola" data-price="43" data-base-ingredients="Sos San Marzano, Mozzarella, Szynka Parmeńska, Świeża Rukola, Pomidorki Cherry, Płatki Grana Padano">
-                    <img src="https://images.unsplash.com/photo-1620374645310-f9d97e733aa2?q=80&w=1974&auto=format&fit=crop" alt="Pizza Parma e Rucola">
+
+                <div class="menu-item" data-id="5" data-name="Parma e Rucola" data-price="43" data-base-ingredients="Szynka Parmeńska, świeża rukola, płatki Grana Padano, oliwa truflowa.">
+                    <img src="https://images.unsplash.com/photo-1544982631-5c3a35b1d9c1?q=80&w=1887&auto=format&fit=crop" alt="Parma e Rucola">
                     <div class="menu-item-content">
                         <h3>5. Parma e Rucola</h3>
                         <p>Szynka Parmeńska, świeża rukola i płatki Grana Padano.</p>
-                         <div class="menu-item-footer">
+                        <div class="menu-item-footer">
                             <span class="price">43 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
+                            <button class="btn btn-small view-details-btn">PERSONALIZUJ</button>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item" data-id="vegetariana" data-name="Ortolana (Wege)" data-price="37" data-base-ingredients="Sos San Marzano, Mozzarella, Grillowana Cukinia, Bakłażan, Papryka, Oliwki Kalamata, Oregano">
-                    <img src="https://images.unsplash.com/photo-1594897003000-8439d09e53be?q=80&w=2070&auto=format&fit=crop" alt="Pizza Ortolana">
+
+                <div class="menu-item" data-id="6" data-name="Ortolana (Wege)" data-price="37" data-base-ingredients="Świeże, grillowane warzywa z pieca, czosnek, cukinia, bakłażan.">
+                    <img src="https://images.unsplash.com/photo-1541745863-73d82d3345d3?q=80&w=1887&auto=format&fit=crop" alt="Ortolana">
                     <div class="menu-item-content">
                         <h3>6. Ortolana (Wege)</h3>
-                        <p>Sezonowe, grillowane warzywa z pieca, świeże oregano.</p>
-                         <div class="menu-item-footer">
+                        <p>Świeże, grillowane warzywa z pieca, dodatek czosnku.</p>
+                        <div class="menu-item-footer">
                             <span class="price">37 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
+                            <button class="btn btn-small view-details-btn">PERSONALIZUJ</button>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item" data-id="gamberi" data-name="Gamberi e Pesto" data-price="48" data-base-ingredients="Sos Pesto Genovese, Mozzarella, Krewetki Tigre, Pomidorki Cherry, Czosnek">
-                    <img src="https://images.unsplash.com/photo-1570198084666-4191d84224c3?q=80&w=1935&auto=format&fit=crop" alt="Pizza Gamberi">
+
+                <div class="menu-item" data-id="7" data-name="Gamberi e Pesto" data-price="48" data-base-ingredients="Krewetki Tigre, bazyliowe Pesto Genovese, pomidorki koktajlowe.">
+                    <img src="https://images.unsplash.com/photo-1605387431267-27038e2354c1?q=80&w=1887&auto=format&fit=crop" alt="Gamberi e Pesto">
                     <div class="menu-item-content">
                         <h3>7. Gamberi e Pesto</h3>
-                        <p>Krewetki Tigre, bazyliowe Pesto Genovese, czosnek i chilli.</p>
-                         <div class="menu-item-footer">
+                        <p>Krewetki Tigre, bazyliowe Pesto Genovese, pomidorki koktajlowe.</p>
+                        <div class="menu-item-footer">
                             <span class="price">48 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
+                            <button class="btn btn-small view-details-btn">PERSONALIZUJ</button>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item" data-id="bolognese" data-name="Bolognese e Tartufo" data-price="49" data-base-ingredients="Sos Bolognese z wołowiny, Mozzarella, Boczek Pancetta, Krem Truflowy, Płatki Parmezanu">
-                    <img src="https://images.unsplash.com/photo-1599395982862-2f3174246194?q=80&w=2070&auto=format&fit=crop" alt="Pizza Bolognese">
+
+                 <div class="menu-item" data-id="8" data-name="Bufala D.O.P" data-price="45" data-base-ingredients="Mozzarella di Bufala, ser Parmigiano Reggiano, świeże pomidorki.">
+                    <img src="https://images.unsplash.com/photo-1595166635919-b6840742d4a1?q=80&w=1968&auto=format&fit=crop" alt="Bufala D.O.P">
                     <div class="menu-item-content">
-                        <h3>8. Bolognese e Tartufo</h3>
-                        <p>Wolno gotowany sos Bolognese, Boczek Pancetta i krem truflowy.</p>
-                         <div class="menu-item-footer">
-                            <span class="price">49 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item" data-id="bufala" data-name="Bufala D.O.P" data-price="45" data-base-ingredients="Sos San Marzano, Świeża Mozzarella di Bufala D.O.P, Pomidorki Cherry, Świeża Bazylia">
-                    <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?q=80&w=2070&auto=format&fit=crop" alt="Pizza Bufala">
-                    <div class="menu-item-content">
-                        <h3>9. Bufala D.O.P</h3>
-                        <p>Najszlachetniejsza Mozzarella di Bufala, bez kompromisów.</p>
-                         <div class="menu-item-footer">
+                        <h3>8. Bufala D.O.P</h3>
+                        <p>Wyborna, oryginalna Mozzarella di Bufala, ser Parmigiano Reggiano.</p>
+                        <div class="menu-item-footer">
                             <span class="price">45 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
+                            <button class="btn btn-small view-details-btn">PERSONALIZUJ</button>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item" data-id="calzone" data-name="Calzone Ricotta e Spinaci" data-price="42" data-base-ingredients="Mozzarella, Ricotta, Świeży Szpinak, Czosnek, Prosciutto Cotto (Pizza zamknięta)">
-                    <img src="https://images.unsplash.com/photo-1571407338378-b78f8373f7d1?q=80&w=1974&auto=format&fit=crop" alt="Pizza Calzone">
+
+                <div class="menu-item" data-id="9" data-name="Złota Palma (KOX123)" data-price="400" data-base-ingredients="Absolutny luksus. Wołowina Wagyu, trufla, szafran, 24-karatowe złoto.">
+                    <img src="https://images.unsplash.com/photo-1595229221147-3a17ea1e33d2?q=80&w=1887&auto=format&fit=crop" alt="Złota Palma (KOX123)">
                     <div class="menu-item-content">
-                        <h3>10. Calzone Ricotta</h3>
-                        <p>Koperta ciasta, ricotta, szpinak i Prosciutto Cotto.</p>
-                         <div class="menu-item-footer">
-                            <span class="price">42 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item" data-id="salsiccia" data-name="Salsiccia e Broccoletti" data-price="46" data-base-ingredients="Sos Biały, Mozzarella, Włoska Kiełbasa Salsiccia, Brokuły Rabe (Broccoletti), Czosnek, Chilli">
-                    <img src="https://images.unsplash.com/photo-1571407338378-b78f8373f7d1?q=80&w=1974&auto=format&fit=crop" alt="Pizza Salsiccia">
-                    <div class="menu-item-content">
-                        <h3>11. Salsiccia e Broccoletti</h3>
-                        <p>Klasyk z południa Włoch - pikantna kiełbasa i brokuły rabe.</p>
-                         <div class="menu-item-footer">
-                            <span class="price">46 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item" data-id="nduja" data-name="Nduja e Miele" data-price="45" data-base-ingredients="Sos San Marzano, Mozzarella, Pikantna Nduja, Czerwona Cebula, Miód Truflowy">
-                    <img src="https://images.unsplash.com/photo-1571407338378-b78f8373f7d1?q=80&w=1974&auto=format&fit=crop" alt="Pizza Nduja">
-                    <div class="menu-item-content">
-                        <h3>12. Nduja e Miele</h3>
-                        <p>Pikantna Nduja, czerwona cebula i słodycz miodu truflowego.</p>
-                         <div class="menu-item-footer">
-                            <span class="price">45 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item" data-id="pollo" data-name="Pollo Pesto (Biała)" data-price="44" data-base-ingredients="Sos Biały, Mozzarella, Grillowany Kurczak, Sos Pesto, Pomidorki Suszone, Parmezan">
-                    <img src="https://images.unsplash.com/photo-1594897003000-8439d09e53be?q=80&w=2070&auto=format&fit=crop" alt="Pizza Pollo">
-                    <div class="menu-item-content">
-                        <h3>13. Pollo Pesto (Biała)</h3>
-                        <p>Biała pizza z grillowanym kurczakiem, pesto i suszonymi pomidorami.</p>
-                         <div class="menu-item-footer">
-                            <span class="price">44 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item" data-id="mortadella" data-name="Mortadella e Pistachio" data-price="47" data-base-ingredients="Sos Biały, Mozzarella, Włoska Mortadella, Krem Pistacjowy, Płatki Parmezanu, Oliwa">
-                    <img src="https://images.unsplash.com/photo-1620023419088-751240283c4b?q=80&w=1974&auto=format&fit=cover" alt="Pizza Mortadella">
-                    <div class="menu-item-content">
-                        <h3>14. Mortadella e Pistachio</h3>
-                        <p>Mortadella, krem pistacjowy, klasyka z regionu Emilia-Romania.</p>
-                         <div class="menu-item-footer">
-                            <span class="price">47 zł</span>
-                            <button class="btn btn-small view-details-btn">Personalizuj</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="menu-item luxury-item" data-id="kox123" data-name="Złota Palma (KOX123)" data-price="400" data-base-ingredients="Krem Szafranowy, Wołowina Wagyu A5, Czarne Trufle, Kawior Osetra, 24k Złoto Jadalne">
-                    <img src="https://images.unsplash.com/photo-1570198083811-9f9b5c3d2e2c?q=80&w=1935&auto=format&fit=crop" alt="Pizza Złota Palma">
-                    <div class="menu-item-content">
-                        <h3>15. Złota Palma (KOX123)</h3>
-                        <p>Absolutny luksus. Wołowina Wagyu, trufle, kawior i jadalne 24-karatowe złoto.</p>
-                         <div class="menu-item-footer">
+                        <h3>9. Złota Palma (KOX123)</h3>
+                        <p>Absolutny luksus. Wołowina Wagyu, trufla, szafran i jadalne 24-karatowe złoto.</p>
+                        <div class="menu-item-footer">
                             <span class="price">400 zł</span>
-                            <button class="btn btn-small view-details-btn">Zamów KOXA</button>
+                            <button class="btn btn-small view-details-btn luxury-item">ZAMÓW PÓŁ</button>
                         </div>
                     </div>
                 </div>
-                
-            </div>
-        </section>
 
-        <section id="highlights" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Nasi Klienci o Mięsnej 67</h2>
-                <div class="review-grid">
-                    <div class="review-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"Najlepsza pizza w mieście, ciasto to absolutna perfekcja. Wreszcie rzemieślnicza jakość w Bydgoszczy!"</p>
-                        <div class="review-author">
-                            <i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i>
-                            <span>Anna M. (Google Recenzje)</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="highlights" class="content-section">
+        <div class="container">
+            <h2 class="section-title">CO O NAS MÓWIĄ</h2>
+            <div class="review-grid">
+                <div class="review-card">
+                    <i class="fas fa-quote-left"></i>
+                    <p>Najlepsza pizza neapolitańska, jaką jadłem w Bydgoszczy. Ciasto jest idealne, lekkie i ma te fantastyczne bąble. Spróbujcie Diavoli!</p>
+                    <div class="review-author">
+                        <span>Jan K.</span>
+                        <div>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                     </div>
-                    <div class="review-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"Fantastyczna Diavola z idealnie chrupiącymi brzegami. Możliwość personalizacji składników to genialny pomysł!"</p>
-                        <div class="review-author">
-                            <i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star-half-alt gold"></i>
-                            <span>Piotr K. (Facebook)</span>
+                </div>
+                <div class="review-card">
+                    <i class="fas fa-quote-left"></i>
+                    <p>Szybka dostawa i genialna jakość. Ciasto dojrzewa 72 godziny i to czuć! Ortolana to mistrzostwo wśród pizz wege. Polecam!</p>
+                    <div class="review-author">
+                        <span>Anna M.</span>
+                        <div>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                         </div>
                     </div>
-                    <div class="review-card">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"Zamawiałem 'Złotą Palmę' na urodziny. Choć droga, to była to niezapomniana kolacja. Polecam to luksusowe szaleństwo."</p>
-                        <div class="review-author">
-                            <i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i><i class="fas fa-star gold"></i>
-                            <span>"KOX123"</span>
+                </div>
+                <div class="review-card">
+                    <i class="fas fa-quote-left"></i>
+                    <p>Bufala D.O.P to poezja! Składniki są najwyższej jakości. Widać, że pizza robiona jest z pasją i w tradycyjnym piecu. Warto każdej złotówki.</p>
+                    <div class="review-author">
+                        <span>Piotr W.</span>
+                        <div>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="order" class="container content-section">
-            <h2 class="section-title">Finalizacja Zamówienia</h2>
+    <section id="order" class="content-section">
+        <div class="container">
+            <h2 class="section-title">ZŁÓŻ ZAMÓWIENIE</h2>
             <div class="order-layout">
                 <div id="cart-summary">
-                    <h3><i class="fas fa-shopping-cart"></i> Twój Koszyk</h3>
+                    <h3>Twoje Zamówienie</h3>
                     <div id="cart-items">
                         <p>Wybierz pizzę z naszego menu, by dodać ją do zamówienia.</p>
                     </div>
@@ -284,76 +235,73 @@
                     </div>
                 </div>
 
-                <form id="checkout-form" action="https://formspree.io/f/xeoryvdq" method="POST">
-                    <h3><i class="fas fa-truck"></i> Dane do Dostawy</h3>
-                    <p class="form-hint">Prosimy o podanie precyzyjnych danych. Lokalizacja GPS zwiększy szybkość dostawy.</p>
-                    <div class="form-group">
-                        <input type="text" id="name" name="Imię i Nazwisko" required placeholder="Imię i Nazwisko">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="address" name="Adres" required placeholder="Ulica, numer domu / mieszkania, miasto">
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" id="phone" name="Telefon" required placeholder="Numer telefonu">
-                    </div>
-
-                    <input type="hidden" name="Lokalizacja (pinezka)" id="location-link">
-                    <textarea name="Zamówienie" id="order-summary-hidden" style="display:none;"></textarea>
-                    
-                    <button type="submit" class="btn primary-btn">Zamawiam i płacę przy odbiorze</button>
-                    <p id="form-status"></p>
-                </form>
+                <div id="checkout-form-wrapper">
+                    <form id="checkout-form" action="https://formspree.io/f/mpzeyzqo" method="POST">
+                        <h3>Dane do dostawy</h3>
+                        <div class="form-group">
+                            <input type="text" name="Imię i Nazwisko" placeholder="Imię i Nazwisko" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="Telefon" placeholder="Telefon" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="Adres Dostawy" placeholder="Adres Dostawy (ulica, numer, miasto)" required>
+                        </div>
+                        <div class="form-group">
+                             <input type="text" id="location-link" name="Lokalizacja (link)" placeholder="Lokalizacja (link)" readonly>
+                        </div>
+                        <input type="hidden" name="Podsumowanie Zamówienia" id="order-summary-hidden" value="Koszyk jest pusty.">
+                        <button type="submit" class="btn">ZAMAWIAM I PŁACĘ PRZY ODBIORZE</button>
+                        <p id="form-status"></p>
+                    </form>
+                </div>
             </div>
-        </section>
-        
-        <section id="contact" class="container content-section">
-             <h2 class="section-title">Lokalizacja i Kontakt</h2>
-             <div class="contact-info">
-                 <p><i class="fas fa-map-marker-alt"></i> ul. Mięsna 67, 85-001 Bydgoszcz</p>
-                 <p><i class="fas fa-phone"></i> **754 968 294** (Numer do Pizzerii)</p>
-                 <p><i class="fas fa-clock"></i> Pon-Ndz: 12:00 - 23:00</p>
-             </div>
-             <div class="map-container">
-                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2360.758414436034!2d17.99420657736636!3d53.12354677221087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4703a95c9a4f4d2f%3A0x6a2c5f1c7d2e4c2c!2sBydgoszcz!5e0!3m2!1sen!2spl!4v1701389278051!5m2!1sen!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <section id="contact" class="content-section">
+        <div class="container">
+            <h2 class="section-title">KONTAKT I DOSTĘPNOŚĆ</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Adres: Mięsna 67, 85-950 Bydgoszcz</p>
+                <p><i class="fas fa-phone"></i> Telefon: +48 52 123 45 67</p>
+                <p><i class="fas fa-envelope"></i> Email: kontakt@miesna67.pl</p>
+                <p><i class="fas fa-clock"></i> Godziny: Pon. - Ndz. 12:00 - 22:00</p>
+            </div>
+            <div class="map-container">
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2432.2285150820087!2d17.98972581566373!3d53.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4703138b7e2d9a3b%3A0x7d27e98a3e81a8b!2sStary%20Rynek%2C%20Bydgoszcz!5e0!3m2!1spl!2spl!4v1678896000000!5m2!1spl!2spl" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="container">
-            <div class="management-info">
-                <h4><i class="fas fa-users-cog"></i> Właściciele Pizzerii Mięsna 67</h4>
-                <p>Paweł Konieczny & Michał Randomowy</p>
-                <p>Kontakt Biznesowy: 754 968 294</p>
-            </div>
-            <p>© 2024 Pizzeria Mięsna 67. Wszelkie prawa zastrzeżone.</p>
+            <h4>Mięsna 67</h4>
+            <p>&copy; 2025 Mięsna 67. Wszelkie prawa zastrzeżone. Projekt i kod: Twoje Imię.</p>
         </div>
     </footer>
 
-
     <div id="details-modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">×</span>
-            <h3 id="modal-pizza-name"></h3>
-            <p class="modal-price" id="modal-pizza-price"></p>
-            
+            <span class="close-btn">&times;</span>
+            <h3 id="modal-pizza-name">Nazwa Pizzy</h3>
             <div class="modal-grid">
+                
                 <div class="modal-details-info">
-                    <h4><i class="fas fa-info-circle"></i> Szczegóły Wykonania</h4>
-                    <p><strong>Skład Ciasta:</strong> Mąka 00, woda, minimalne drożdże (0.1%), sól morska. 72h fermentacji.</p>
-                    <p><strong>Pieczenie:</strong> Tradycyjny piec opalany drewnem.</p>
-                    <p><strong>Temperatura:</strong> 450°C (Neapolitańska).</p>
-                    <p><strong>Czas Wypieku:</strong> Ok. 90 sekund.</p>
+                    <h4><i class="fas fa-info-circle"></i> Szczegóły</h4>
+                    <p><strong>Cena:</strong> <span id="modal-pizza-price">0.00 zł</span></p>
+                    <p><strong>Dojrzewanie ciasta:</strong> 72h</p>
+                    <p><strong>Czas wypieku:</strong> 90 sekund (450°C)</p>
+                    <p><strong>Skład ciasta:</strong> Mąka 00, woda, 0.1% drożdży, sól morska.</p>
                 </div>
-
+                
                 <div class="modal-personalization">
-                    <h4><i class="fas fa-cheese"></i> Personalizuj Składniki</h4>
+                    <h4><i class="fas fa-utensils"></i> Personalizuj</h4>
                     <form id="personalization-form">
                         </form>
                 </div>
             </div>
-
-            <button class="btn primary-btn add-to-cart-modal-btn" id="add-to-cart-modal-btn" data-pizza-id="">Dodaj spersonalizowaną pizzę do koszyka</button>
+            <button id="add-to-cart-modal-btn" class="btn add-to-cart-modal-btn">DODAJ DO KOSZYKA</button>
         </div>
     </div>
 
