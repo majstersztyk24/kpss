@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizzeria Mięsna 67 - Nowoczesna Pizza w Bydgoszczy</title>
+    <title>Pizzeria Mięsna 67 - Premium Pizza Experience w Bydgoszczy</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Dodajemy Font Awesome dla ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
 
@@ -18,7 +20,7 @@
                 <a href="#about">O nas</a>
                 <a href="#menu">Menu</a>
                 <a href="#gallery">Galeria</a>
-                <a href="#order">Zamów</a>
+                <a href="#order">Zamów <span id="cart-counter">0</span></a>
                 <a href="#contact">Kontakt</a>
             </nav>
         </div>
@@ -28,30 +30,36 @@
         <!-- SEKCJA HERO -->
         <section id="hero">
             <div class="hero-content">
-                <h1>Rzemieślnicza pizza w sercu Bydgoszczy</h1>
-                <p>Poczuj smak prawdziwych Włoch przy Mięsnej 67</p>
-                <a href="#menu" class="btn">Zobacz nasze menu</a>
+                <h1>Sztuka Pizzy, Perfekcja Smaku</h1>
+                <p>Odkryj rzemieślniczą pizzę w sercu Bydgoszczy</p>
+                <a href="#menu" class="btn">Poznaj nasze kompozycje</a>
             </div>
         </section>
 
         <!-- SEKCJA O NAS -->
         <section id="about" class="container content-section">
-            <h2 class="section-title">Nasza Pasja, Twój Smak</h2>
-            <div class="about-content">
-                <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=80&w=1928&auto=format&fit=crop" alt="Piec do pizzy">
-                <p>W Pizzerii Mięsna 67 wierzymy, że pizza to sztuka. Nasze ciasto dojrzewa przez 72 godziny, aby osiągnąć idealną lekkość i chrupkość. Korzystamy z oryginalnej włoskiej mąki, soczystych pomidorów San Marzano i świeżej mozzarelli fior di latte. Każdy placek wypiekamy w piecu opalanym drewnem, co nadaje mu niepowtarzalny aromat. Jesteśmy tu, by dzielić się naszą miłością do autentycznej kuchni.</p>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2 class="section-title">Nasza Filozofia</h2>
+                    <p>W Mięsnej 67 pizza to nie tylko jedzenie – to rytuał. Nasze ciasto, dojrzewające 72 godziny, staje się płótnem dla najlepszych składników: pomidorów San Marzano, kremowej mozzarelli fior di latte i świeżych ziół. Każdy placek wypiekamy w temperaturze 450°C w tradycyjnym piecu, by w 90 sekund zamknąć w nim esencję Włoch. To nasza obietnica jakości i pasji, którą czuć w każdym kęsie.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=80&w=1928&auto=format&fit=crop" alt="Piec do pizzy i składniki">
+                </div>
             </div>
         </section>
-
+        
         <!-- SEKCJA PIZZA MIESIĄCA -->
         <section id="special" class="content-section">
             <div class="container">
-                <h2 class="section-title">Pizza Miesiąca: Tartufo</h2>
                 <div class="special-offer">
-                    <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=1935&auto=format&fit=crop" alt="Pizza Tartufo">
+                    <div class="special-image">
+                        <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=1935&auto=format&fit=crop" alt="Pizza Tartufo">
+                    </div>
                     <div class="special-details">
-                        <h3>Biała Trufla & Prosciutto</h3>
-                        <p>Kremowy sos na bazie białych trufli, mozzarella fior di latte, szynka Prosciutto di Parma, świeża rukola i płatki parmezanu. Prawdziwa uczta dla koneserów!</p>
+                        <h2 class="section-title">Gwiazda Miesiąca</h2>
+                        <h3>Bianca Tartufo e Prosciutto</h3>
+                        <p>Aksamitny krem truflowy, mozzarella fior di latte, plastry oryginalnej Prosciutto di Parma, świeża rukola i płatki Grana Padano. Luksusowa kompozycja dla prawdziwych smakoszy.</p>
                         <span class="price">42 zł</span>
                         <button class="btn add-to-cart-btn" data-name="Pizza Miesiąca: Tartufo" data-price="42">Dodaj do zamówienia</button>
                     </div>
@@ -63,44 +71,52 @@
         <section id="menu" class="container content-section">
             <h2 class="section-title">Menu</h2>
             <div class="menu-grid">
-                <!-- Pizza 1 -->
+                <!-- Karta Pizzy -->
                 <div class="menu-item">
                     <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop" alt="Pizza Margherita">
-                    <h3>1. Margherita</h3>
-                    <p>Sos pomidorowy San Marzano, mozzarella fior di latte, świeża bazylia, oliwa z oliwek.</p>
-                    <div class="menu-item-footer">
-                        <span class="price">32 zł</span>
-                        <button class="btn-small add-to-cart-btn" data-name="Margherita" data-price="32">Dodaj</button>
+                    <div class="menu-item-content">
+                        <h3>1. Margherita</h3>
+                        <p>Sos San Marzano, mozzarella fior di latte, świeża bazylia, oliwa extra vergine.</p>
+                        <div class="menu-item-footer">
+                            <span class="price">32 zł</span>
+                            <button class="btn-small add-to-cart-btn" data-name="Margherita" data-price="32">Dodaj</button>
+                        </div>
                     </div>
                 </div>
-                <!-- Pizza 2 -->
+                <!-- Karta Pizzy -->
                 <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1981&auto=format&fit=crop" alt="Pizza Pepperoni">
-                    <h3>2. Diavola</h3>
-                    <p>Sos pomidorowy, mozzarella, pikantne salami Spianata Calabra, papryczki chili, cebula.</p>
-                     <div class="menu-item-footer">
-                        <span class="price">38 zł</span>
-                        <button class="btn-small add-to-cart-btn" data-name="Diavola" data-price="38">Dodaj</button>
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1981&auto=format&fit=crop" alt="Pizza Diavola">
+                    <div class="menu-item-content">
+                        <h3>2. Diavola</h3>
+                        <p>Sos San Marzano, mozzarella, pikantne salami Spianata Calabra, czerwona cebula.</p>
+                         <div class="menu-item-footer">
+                            <span class="price">38 zł</span>
+                            <button class="btn-small add-to-cart-btn" data-name="Diavola" data-price="38">Dodaj</button>
+                        </div>
                     </div>
                 </div>
-                <!-- Pizza 3 -->
+                <!-- Karta Pizzy -->
                 <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=2070&auto=format&fit=crop" alt="Pizza Capricciosa">
-                    <h3>3. Capricciosa</h3>
-                    <p>Sos pomidorowy, mozzarella, włoska szynka Prosciutto Cotto, pieczarki, karczochy.</p>
-                     <div class="menu-item-footer">
-                        <span class="price">39 zł</span>
-                        <button class="btn-small add-to-cart-btn" data-name="Capricciosa" data-price="39">Dodaj</button>
+                    <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=2070&auto=format&fit=crop" alt="Pizza Prosciutto e Funghi">
+                    <div class="menu-item-content">
+                        <h3>3. Prosciutto e Funghi</h3>
+                        <p>Sos San Marzano, mozzarella, włoska szynka Prosciutto Cotto, świeże pieczarki.</p>
+                         <div class="menu-item-footer">
+                            <span class="price">39 zł</span>
+                            <button class="btn-small add-to-cart-btn" data-name="Prosciutto e Funghi" data-price="39">Dodaj</button>
+                        </div>
                     </div>
                 </div>
-                <!-- Pizza 4 -->
+                <!-- Karta Pizzy -->
                 <div class="menu-item">
                     <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=2069&auto=format&fit=crop" alt="Pizza Cztery Sery">
-                    <h3>4. Quattro Formaggi</h3>
-                    <p>Sos śmietanowy, mozzarella, gorgonzola, parmezan, wędzona scamorza, orzechy włoskie.</p>
-                     <div class="menu-item-footer">
-                        <span class="price">41 zł</span>
-                        <button class="btn-small add-to-cart-btn" data-name="Quattro Formaggi" data-price="41">Dodaj</button>
+                    <div class="menu-item-content">
+                        <h3>4. Quattro Formaggi</h3>
+                        <p>Sos śmietanowy, mozzarella, gorgonzola, parmezan, wędzona scamorza, orzechy włoskie.</p>
+                         <div class="menu-item-footer">
+                            <span class="price">41 zł</span>
+                            <button class="btn-small add-to-cart-btn" data-name="Quattro Formaggi" data-price="41">Dodaj</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,69 +124,42 @@
 
         <!-- SEKCJA GALERIA -->
         <section id="gallery" class="container content-section">
-            <h2 class="section-title">Nasza Galeria</h2>
+            <h2 class="section-title">Nasza Przestrzeń</h2>
             <div class="gallery-grid">
-                <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?q=80&w=2070&auto=format&fit=crop" alt="Składniki do pizzy">
-                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop" alt="Wnętrze restauracji">
-                <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983d34?q=80&w=2070&auto=format&fit=crop" alt="Pizza na stole">
-                <img src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?q=80&w=2076&auto=format&fit=crop" alt="Pizzaiolo przy pracy">
-            </div>
-        </section>
-        
-        <!-- SEKCJA OPINIE -->
-        <section id="testimonials" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Co mówią nasi goście</h2>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <p>"Najlepsza pizza w Bydgoszczy, bez dwóch zdań. Ciasto jest po prostu idealne, a składniki czuć, że są świeże. Wracam regularnie!"</p>
-                        <h4>- Anna K.</h4>
-                    </div>
-                    <div class="testimonial-card">
-                        <p>"Klimat tego miejsca jest super, a pizza Tartufo to mistrzostwo świata. Czuć, że robią to ludzie z pasją. Polecam każdemu."</p>
-                        <h4>- Piotr Z.</h4>
-                    </div>
-                    <div class="testimonial-card">
-                        <p>"Zamówienie online działa bez zarzutu. Pizza przyjechała gorąca i na czas. Super opcja z pinezką GPS dla dostawcy!"</p>
-                        <h4>- Ewelina S.</h4>
-                    </div>
-                </div>
+                <a href="https://images.unsplash.com/photo-1579751626657-72bc17010498?q=80&w=2070&auto=format&fit=crop" class="gallery-item"><img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?q=80&w=2070&auto=format&fit=crop" alt="Składniki do pizzy"><div><i class="fas fa-search-plus"></i></div></a>
+                <a href="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop" class="gallery-item"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop" alt="Wnętrze restauracji"><div><i class="fas fa-search-plus"></i></div></a>
+                <a href="https://images.unsplash.com/photo-1604382354936-07c5d9983d34?q=80&w=2070&auto=format&fit=crop" class="gallery-item"><img src="https://images.unsplash.com/photo-1604382354936-07c5d9983d34?q=80&w=2070&auto=format&fit=crop" alt="Pizza na stole"><div><i class="fas fa-search-plus"></i></div></a>
+                <a href="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?q=80&w=2076&auto=format&fit=crop" class="gallery-item"><img src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?q=80&w=2076&auto=format&fit=crop" alt="Pizzaiolo przy pracy"><div><i class="fas fa-search-plus"></i></div></a>
             </div>
         </section>
 
         <!-- SEKCJA ZAMÓWIENIA -->
         <section id="order" class="container content-section">
-            <h2 class="section-title">Twoje Zamówienie</h2>
+            <h2 class="section-title">Skompletuj Zamówienie</h2>
             <div class="order-layout">
-                <!-- Lewa strona: Podsumowanie koszyka -->
                 <div id="cart-summary">
-                    <h3>Podsumowanie</h3>
+                    <h3><i class="fas fa-shopping-cart"></i> Twój Koszyk</h3>
                     <div id="cart-items">
-                        <p>Twój koszyk jest pusty. Wybierz coś z menu!</p>
+                        <p>Wybierz pizzę z naszego menu, by dodać ją do zamówienia.</p>
                     </div>
                     <div id="cart-total">
                         <strong>Do zapłaty: 0.00 zł</strong>
                     </div>
                 </div>
 
-                <!-- Prawa strona: Formularz danych -->
                 <form id="checkout-form" action="https://formspree.io/f/xeoryvdq" method="POST">
-                    <h3>Dane do dostawy</h3>
-                    <p>Poprosimy o dostęp do Twojej lokalizacji, aby dostawca mógł łatwiej do Ciebie trafić.</p>
+                    <h3><i class="fas fa-truck"></i> Dane do Dostawy</h3>
+                    <p class="form-hint">Poprosimy o dostęp do Twojej lokalizacji, aby dostawca mógł łatwiej do Ciebie trafić.</p>
                     <div class="form-group">
-                        <label for="name">Imię i Nazwisko</label>
-                        <input type="text" id="name" name="Imię i Nazwisko" required>
+                        <input type="text" id="name" name="Imię i Nazwisko" required placeholder="Imię i Nazwisko">
                     </div>
                     <div class="form-group">
-                        <label for="address">Adres dostawy</label>
-                        <input type="text" id="address" name="Adres" required>
+                        <input type="text" id="address" name="Adres" required placeholder="Ulica, numer domu / mieszkania, miasto">
                     </div>
                     <div class="form-group">
-                        <label for="phone">Numer telefonu</label>
-                        <input type="tel" id="phone" name="Telefon" required>
+                        <input type="tel" id="phone" name="Telefon" required placeholder="Numer telefonu">
                     </div>
 
-                    <!-- Ukryte pola do wysłania na maila -->
                     <input type="hidden" name="Lokalizacja (pinezka)" id="location-link">
                     <textarea name="Zamówienie" id="order-summary-hidden" style="display:none;"></textarea>
                     
@@ -179,24 +168,24 @@
                 </form>
             </div>
         </section>
-
+        
         <!-- SEKCJA KONTAKT -->
         <section id="contact" class="container content-section">
-             <h2 class="section-title">Kontakt i Lokalizacja</h2>
+             <h2 class="section-title">Znajdź Nas</h2>
              <div class="contact-info">
-                <p><strong>Adres:</strong> ul. Mięsna 67, 85-001 Bydgoszcz</p>
-                <p><strong>Telefon:</strong> 555-444-333</p>
-                <p><strong>Godziny otwarcia:</strong> Pon-Ndz: 12:00 - 23:00</p>
+                <p><i class="fas fa-map-marker-alt"></i> ul. Mięsna 67, 85-001 Bydgoszcz</p>
+                <p><i class="fas fa-phone"></i> 555-444-333 </p>
+                <p><i class="fas fa-clock"></i> Pon-Ndz: 12:00 - 23:00</p>
             </div>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2383.159495007328!2d18.00160231583733!3d53.12521797993385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470313df22a4f48b%3A0x6b6d5b06d678d781!2sMi%C4%99sna%2067%2C%20Bydgoszcz!5e0!3m2!1spl!2spl!4v1678890123456" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2383.159495007328!2d18.00160231583733!3d53.12521797993385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470313df22a4f48b%3A0x6b6d5b06d678d781!2sMi%C4%99sna%2067%2C%20Bydgoszcz!5e0!3m2!1spl!2spl!4v1678890123456" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Pizzeria Mięsna 67. Stworzone z pasją.</p>
+            <p>&copy; 2024 Pizzeria Mięsna 67. Designed with passion.</p>
         </div>
     </footer>
 
