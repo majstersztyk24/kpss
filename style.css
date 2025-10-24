@@ -28,7 +28,7 @@ body.dark-theme {
 }
 
 
-/* --- PODSTAWOWE STYLE I TYPOGRAFIA --- */
+/* --- PODSTAWOWE STYLE I TYPOGRAFIA (DODANO RESET MARGINESU) --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -40,7 +40,8 @@ body {
     line-height: 1.7; 
     font-size: 16px;
     overflow-x: hidden;
-    transition: background-color 0.5s, color 0.5s; /* Płynne przejście motywu */
+    transition: background-color 0.5s, color 0.5s; 
+    margin: 0; /* Zapewnia, że strona otwiera się na samej górze */
 }
 
 h1, h2, h3, h4 {
@@ -87,7 +88,7 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
     transition: color 0.5s;
 }
 
-#menu .section-title { color: var(--card-text); } /* Nagłówek Menu na tle menu */
+#menu .section-title { color: var(--card-text); } 
 
 .content-section.visible .section-title { opacity: 1; transition: opacity 0.8s ease-out 0.2s; }
 
@@ -99,7 +100,7 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
     transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1), transform 1.0s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.5s;
 }
 #about, #order, #highlights { background-color: var(--light-bg); }
-#menu { background-color: var(--menu-section-bg); } /* Użycie zmiennej dla tła SEKCEJI menu */
+#menu { background-color: var(--menu-section-bg); } 
 
 .content-section.visible { opacity: 1; transform: translateY(0); }
 
@@ -116,7 +117,7 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
     cursor: pointer; text-transform: uppercase;
     font-size: 0.95rem; letter-spacing: 1px;
     box-shadow: 0 5px 15px rgba(255, 112, 67, 0.3);
-    text-decoration: none; /* Całkowite usunięcie podkreślenia */
+    text-decoration: none; 
 }
 .btn:hover {
     background-color: var(--primary-color); 
@@ -126,7 +127,7 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
 .btn-small { padding: 8px 18px; font-size: 0.85rem; letter-spacing: 0.5px; }
 
 
-/* --- NAGŁÓWEK I NAWIGACJA (BEZ PODKREŚLEŃ) --- */
+/* --- NAGŁÓWEK I NAWIGACJA --- */
 header {
     background: var(--header-bg);
     backdrop-filter: blur(10px);
@@ -136,29 +137,29 @@ header {
 }
 .header-container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; position: relative; }
 
-/* STYLE DLA LOGO (USUNIĘTE PODKREŚLENIE) */
+/* STYLE DLA LOGO */
 .logo { 
     color: var(--primary-color); 
     font-size: 2.4rem; 
-    text-decoration: none; /* Usunięcie podkreślenia z logo */
+    text-decoration: none; 
     font-family: 'Playfair Display', serif; 
-    font-weight: 900; /* Pogrubienie */
+    font-weight: 900; 
     transition: color 0.5s;
 }
 
-/* NAWIGACJA (BEZ PODKREŚLEŃ) */
-nav { margin-right: auto; /* Przesuwa nawigację na lewo od przełącznika */ }
+/* NAWIGACJA */
+nav { margin-right: auto; }
 nav a {
     color: var(--text-color); 
     margin-left: 1.8rem;
     font-weight: 500; 
-    text-decoration: none; /* Usunięcie podkreślenia */
+    text-decoration: none; 
     position: relative;
     padding: 5px 0;
     transition: color 0.3s;
 }
 nav a:hover {
-    color: var(--secondary-color); /* Zmiana koloru linku przy najechaniu */
+    color: var(--secondary-color); 
 }
 
 #cart-counter {
@@ -171,29 +172,21 @@ nav a:hover {
     transition: background-color 0.5s;
 }
 
-/* --- ELEGANCKI SUWAK ZMIANY MOTYWU (NAPRAWIONA POZYCJA) --- */
+/* --- ELEGANCKI SUWAK ZMIANY MOTYWU --- */
 .theme-switch-wrapper {
-    /* Usunięcie absolutnego pozycjonowania i ustawienie go jako część flow */
     position: static; 
     transform: none; 
-    margin-left: 2rem; /* Odstęp od ostatniego elementu nav */
+    margin-left: 2rem; 
     z-index: 10; 
 }
 
-.theme-switch input {
-    display: none;
-}
-
-.theme-switch {
-    display: inline-block;
-    cursor: pointer;
-}
+.theme-switch input { display: none; }
+.theme-switch { display: inline-block; cursor: pointer; }
 
 .slider {
     position: relative;
-    width: 60px;
-    height: 30px;
-    background-color: var(--secondary-color); /* Kolor tła suwaka dla trybu jasnego */
+    width: 60px; height: 30px;
+    background-color: var(--secondary-color); 
     transition: .4s;
     border-radius: 30px;
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
@@ -202,23 +195,21 @@ nav a:hover {
 .slider:before {
     position: absolute;
     content: "";
-    height: 22px;
-    width: 22px;
-    left: 4px;
-    bottom: 4px;
-    background-color: var(--light-bg); /* Kolor 'suwaka' w trybie jasnym */
+    height: 22px; width: 22px;
+    left: 4px; bottom: 4px;
+    background-color: var(--light-bg); 
     transition: .4s;
     border-radius: 50%;
 }
 
 /* Styl suwaka w trybie ciemnym */
 .theme-switch input:checked + .slider {
-    background-color: var(--primary-color); /* Kolor tła suwaka dla trybu ciemnego */
+    background-color: var(--primary-color); 
 }
 
 .theme-switch input:checked + .slider:before {
     transform: translateX(30px);
-    background-color: var(--card-text); /* Kolor 'suwaka' w trybie ciemnym */
+    background-color: var(--card-text); 
 }
 
 /* Ikony w suwaku */
@@ -227,41 +218,117 @@ nav a:hover {
     top: 50%;
     transform: translateY(-50%);
     font-size: 14px;
-    color: white; /* Kolor ikon niezależnie od motywu */
+    color: white; 
     transition: opacity 0.4s, transform 0.4s;
 }
 
-/* Ikona słońca (tryb jasny) */
-.slider .fa-sun {
-    left: 8px;
-    opacity: 1;
+.slider .fa-sun { left: 8px; opacity: 1; }
+.slider .fa-moon { right: 8px; opacity: 0; }
+.theme-switch input:checked + .slider .fa-sun { opacity: 0; }
+.theme-switch input:checked + .slider .fa-moon { opacity: 1; }
+
+
+/* --- HERO SECTION (ZMIENIONA WYSOKOŚĆ I ZDJĘCIE) --- */
+#hero {
+    height: 55vh; /* ZMNIEJSZONA WYSOKOŚĆ SEKCJI HERO */
+    /* Zmieniono na inny obraz, aby tekst był bardziej czytelny na obrazie pizzy */
+    background: url('https://images.unsplash.com/photo-1541781774459-fb2a64491707?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Ikona księżyca (tryb ciemny) */
-.slider .fa-moon {
-    right: 8px;
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Ciemniejsze tło dla lepszej czytelności tekstu */
+    z-index: 1;
+}
+
+.hero-content {
+    z-index: 2;
+    position: relative;
+}
+
+.hero-content h1 {
+    font-size: 5.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    animation: fadeInUp 1s ease-out 0.3s forwards;
     opacity: 0;
 }
 
-.theme-switch input:checked + .slider .fa-sun {
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    animation: fadeInUp 1s ease-out 0.6s forwards;
     opacity: 0;
 }
 
-.theme-switch input:checked + .slider .fa-moon {
-    opacity: 1;
+.hero-content .btn {
+    animation: fadeInUp 1s ease-out 0.9s forwards;
+    opacity: 0;
+}
+
+/* --- NOWY BANNER --- */
+#new-banner {
+    background-color: var(--secondary-color);
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    transition: background-color 0.5s;
+}
+#new-banner p { margin: 5px 0; }
+#new-banner .banner-address { font-weight: 700; }
+#new-banner i { margin: 0 8px; }
+
+
+/* --- SEKCJA O NAS --- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+.about-image img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.about-subtitle {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+.about-text p {
+    color: var(--text-color);
+    font-size: 1.1rem;
 }
 
 
-/* --- MENU Z CIEMNYMI KARTAMI (NAPRAWIONE ZDJĘCIA I UKŁAD) --- */
+/* --- MENU Z CIEMNYMI KARTAMI --- */
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 .menu-item {
-    background: var(--card-bg); /* Karta dostosowuje się do trybu */
+    background: var(--card-bg); 
     border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Mniejsze, subtelniejsze cienie */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.5s, border-color 0.5s;
     border: 1px solid var(--border-color);
     opacity: 0;
@@ -289,11 +356,11 @@ nav a:hover {
     box-shadow: 0 15px 35px rgba(0,0,0,0.3); 
 }
 
-/* ZDJĘCIA I TREŚĆ KARTY (NAPRAWIONO ROZMIAR ZDJĘĆ) */
+/* ZDJĘCIA I TREŚĆ KARTY */
 .menu-item img {
     width: 100%; 
-    height: 220px; /* Stała wysokość dla wszystkich zdjęć */
-    object-fit: cover; /* Dopasowuje zdjęcie do ramki, nie deformując go */
+    height: 220px; 
+    object-fit: cover; 
     transition: transform 0.5s ease;
     border-bottom: 3px solid var(--primary-color);
 }
@@ -304,14 +371,14 @@ nav a:hover {
 .menu-item-content { 
     padding: 1.5rem; 
     display: flex; flex-direction: column; 
-    height: calc(100% - 220px); /* Dopasowanie wysokości, by reszta się zmieściła */
+    height: calc(100% - 220px); 
 }
 .menu-item h3 { 
     margin-bottom: 0.5rem; 
-    font-family: 'Montserrat', sans-serif; /* Poprawiono font */
+    font-family: 'Montserrat', sans-serif; 
     font-weight: 600; 
     font-size: 1.5rem; 
-    color: var(--secondary-color); /* Kolor nagłówka pizzy */
+    color: var(--secondary-color); 
     transition: color 0.5s;
 }
 .menu-item p { 
@@ -481,7 +548,7 @@ footer p { transition: color 0.5s; }
     margin-right: 10px;
     width: 20px;
     height: 20px;
-    accent-color: var(--primary-color); /* Kolor checkboxa */
+    accent-color: var(--primary-color); 
     cursor: pointer;
 }
 .modal-personalization .base-ingredients { 
@@ -504,71 +571,6 @@ footer p { transition: color 0.5s; }
 @keyframes slideInFromTop { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
 
-/* --- HERO SECTION --- */
-#hero {
-    height: 70vh; /* Wysokość sekcji hero */
-    background: url('https://images.unsplash.com/photo-1579751626657-72bc17010498?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-#hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Ciemniejsze tło dla lepszej czytelności tekstu */
-    z-index: 1;
-}
-
-.hero-content {
-    z-index: 2;
-    position: relative;
-}
-
-.hero-content h1 {
-    font-size: 5.5rem;
-    margin-bottom: 1rem;
-    color: #fff;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-    animation: fadeInUp 1s ease-out 0.3s forwards;
-    opacity: 0;
-}
-
-.hero-content p {
-    font-size: 1.5rem;
-    margin-bottom: 2.5rem;
-    color: rgba(255,255,255,0.9);
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-    animation: fadeInUp 1s ease-out 0.6s forwards;
-    opacity: 0;
-}
-
-.hero-content .btn {
-    animation: fadeInUp 1s ease-out 0.9s forwards;
-    opacity: 0;
-}
-
-/* --- NOWY BANNER --- */
-#new-banner {
-    background-color: var(--secondary-color);
-    color: #fff;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 1.1rem;
-    font-weight: 500;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    transition: background-color 0.5s;
-}
-#new-banner p { margin: 5px 0; }
-#new-banner .banner-address { font-weight: 700; }
-#new-banner i { margin: 0 8px; }
-
-
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 992px) {
     .hero-content h1 { font-size: 4rem; }
@@ -577,7 +579,7 @@ footer p { transition: color 0.5s; }
 }
 @media (max-width: 768px) {
     .header-container { flex-direction: column; padding: 1rem; }
-    .theme-switch-wrapper { margin-left: 0; margin-top: 10px; } /* Pozycja suwaka na mniejszych ekranach */
+    .theme-switch-wrapper { margin-left: 0; margin-top: 10px; } 
     .logo { margin-top: 10px; }
     nav { margin-top: 10px; margin-right: 0; }
     nav a { margin: 0 10px; }
