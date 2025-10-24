@@ -4,8 +4,8 @@
     --dark-bg: #121212;
     --light-bg: #1E1E1E;
     --text-color: #e0e0e0;
-    --heading-font: 'Playfair Display', serif;
-    --body-font: 'Montserrat', sans-serif;
+    --heading-font: 'Cormorant Garamond', serif; /* NOWA CZCIONKA */
+    --body-font: 'Lato', sans-serif; /* NOWA CZCIONKA */
     --border-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -17,8 +17,8 @@ body {
     font-family: var(--body-font);
     background-color: var(--dark-bg);
     color: var(--text-color);
-    line-height: 1.8;
-    font-size: 16px;
+    line-height: 1.7; /* ZMIANA */
+    font-size: 17px; /* WIĘKSZA CZCIONKA BAZOWA */
 }
 
 h1, h2, h3, h4 {
@@ -33,7 +33,7 @@ h1, h2, h3, h4 {
 .section-title { text-align: center; font-size: 3rem; margin-bottom: 1.5rem; color: var(--primary-color); }
 
 .content-section {
-    padding: 100px 0;
+    padding: 80px 0; /* MNIEJSZE ODSTĘPY */
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -55,7 +55,13 @@ h1, h2, h3, h4 {
     font-size: 0.9rem;
     letter-spacing: 0.5px;
 }
-.btn:hover { background-color: #fff; color: #000; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+.btn:hover {
+    background-color: var(--primary-color); /* ŁADNIEJSZY HOVER */
+    filter: brightness(1.2); /* ROZJAŚNIENIE */
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
 .btn-small { padding: 10px 25px; }
 
 /* --- NAGŁÓWEK --- */
@@ -118,11 +124,11 @@ nav a:hover::after { width: 100%; }
 .about-text p { font-size: 1.1rem; }
 .about-image img {
     width: 100%;
-    max-width: 500px; /* Kluczowa zmiana */
+    max-width: 450px; /* MNIEJSZE ZDJĘCIE */
     height: auto;
     border-radius: 10px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    justify-self: center;
+    justify-self: center; /* DODANE WYŚRODKOWANIE */
 }
 
 /* --- PIZZA MIESIĄCA - POPRAWIONY LAYOUT --- */
@@ -136,7 +142,12 @@ nav a:hover::after { width: 100%; }
 .special-details .section-title { text-align: left; font-size: 2.5rem; }
 .special-details h3 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; }
 .special-details .price { font-size: 2rem; font-weight: bold; display: block; margin: 1.5rem 0; }
-.special-image img { width: 100%; max-width: 500px; border-radius: 10px; }
+.special-image img {
+    width: 100%;
+    max-width: 450px; /* MNIEJSZE ZDJĘCIE */
+    border-radius: 10px;
+    justify-self: center; /* DODANE WYŚRODKOWANIE */
+}
 
 /* --- MENU --- */
 .menu-grid {
@@ -153,17 +164,31 @@ nav a:hover::after { width: 100%; }
     border: 1px solid var(--border-color);
 }
 .menu-item:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.4); border-color: var(--primary-color); }
-.menu-item img { width: 100%; height: 240px; object-fit: cover; }
-.menu-item-content { padding: 1.5rem; display: flex; flex-direction: column; height: calc(100% - 240px); }
+.menu-item img {
+    width: 100%;
+    height: 200px; /* NIŻSZE ZDJĘCIE */
+    object-fit: cover;
+}
+.menu-item-content { padding: 1.5rem; display: flex; flex-direction: column; height: calc(100% - 200px); }
 .menu-item h3 { margin-bottom: 0.5rem; }
-.menu-item p { font-size: 0.9rem; flex-grow: 1; color: #aaa; }
+.menu-item p {
+    font-size: 1rem; /* WIĘKSZA CZCIONKA */
+    flex-grow: 1;
+    color: #aaa;
+}
 .menu-item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
 .menu-item .price { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); }
 
 /* --- GALERIA --- */
 .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 .gallery-item { position: relative; overflow: hidden; border-radius: 10px; }
-.gallery-item img { width: 100%; height: 280px; object-fit: cover; display: block; transition: transform 0.4s ease; }
+.gallery-item img {
+    width: 100%;
+    height: 220px; /* NIŻSZE ZDJĘCIE */
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
 .gallery-item div {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(212, 175, 55, 0.7);
@@ -199,7 +224,13 @@ nav a:hover::after { width: 100%; }
 .map-container iframe { width: 100%; height: 100%; border: 0; filter: grayscale(1) invert(0.9) contrast(0.8); }
 
 /* --- STOPKA --- */
-footer { text-align: center; padding: 3rem 0; background: #0c0c0c; margin-top: 100px; color: #888; }
+footer {
+    text-align: center;
+    padding: 3rem 0;
+    background: #0c0c0c;
+    margin-top: 80px; /* MNIEJSZY ODSTĘP */
+    color: #888;
+}
 
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 992px) {
@@ -207,6 +238,7 @@ footer { text-align: center; padding: 3rem 0; background: #0c0c0c; margin-top: 1
     .hero-content h1 { font-size: 3.5rem; }
     .about-grid, .special-offer, .order-layout { grid-template-columns: 1fr; }
     .about-image { grid-row: 1; margin-bottom: 2rem; }
+    .about-image img, .special-image img { margin: 0 auto; } /* Centrowanie na mobilce */
     .about-text .section-title, .special-details .section-title { text-align: center; }
     .gallery-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -218,4 +250,5 @@ footer { text-align: center; padding: 3rem 0; background: #0c0c0c; margin-top: 1
     .hero-content p { font-size: 1.2rem; }
     .content-section { padding: 60px 0; }
     .gallery-grid { grid-template-columns: 1fr; }
+    .menu-grid { grid-template-columns: 1fr; } /* Lepiej wygląda na 1 kolumnie */
 }
