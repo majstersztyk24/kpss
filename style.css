@@ -136,17 +136,18 @@ header {
 }
 .header-container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; position: relative; }
 
-/* STYLE DLA LOGO (BEZ PODKREŚLEŃ) */
+/* STYLE DLA LOGO (USUNIĘTE PODKREŚLENIE) */
 .logo { 
     color: var(--primary-color); 
     font-size: 2.4rem; 
-    text-decoration: none; /* Usunięcie podkreślenia */
+    text-decoration: none; /* Usunięcie podkreślenia z logo */
     font-family: 'Playfair Display', serif; 
+    font-weight: 900; /* Pogrubienie */
     transition: color 0.5s;
 }
-/* Usunięto pseudoelement ::after, który tworzył podkreślenie pod logo */
 
 /* NAWIGACJA (BEZ PODKREŚLEŃ) */
+nav { margin-right: auto; /* Przesuwa nawigację na lewo od przełącznika */ }
 nav a {
     color: var(--text-color); 
     margin-left: 1.8rem;
@@ -159,7 +160,6 @@ nav a {
 nav a:hover {
     color: var(--secondary-color); /* Zmiana koloru linku przy najechaniu */
 }
-/* Usunięto pseudoelement ::before, który tworzył animowane podkreślenie */
 
 #cart-counter {
     background-color: var(--secondary-color); 
@@ -171,13 +171,13 @@ nav a:hover {
     transition: background-color 0.5s;
 }
 
-/* --- ELEGANCKI SUWAK ZMIANY MOTYWU (Dark/Light Mode) --- */
+/* --- ELEGANCKI SUWAK ZMIANY MOTYWU (NAPRAWIONA POZYCJA) --- */
 .theme-switch-wrapper {
-    position: absolute; 
-    left: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10; /* Upewniamy się, że suwak jest na wierzchu */
+    /* Usunięcie absolutnego pozycjonowania i ustawienie go jako część flow */
+    position: static; 
+    transform: none; 
+    margin-left: 2rem; /* Odstęp od ostatniego elementu nav */
+    z-index: 10; 
 }
 
 .theme-switch input {
@@ -577,9 +577,9 @@ footer p { transition: color 0.5s; }
 }
 @media (max-width: 768px) {
     .header-container { flex-direction: column; padding: 1rem; }
-    .theme-switch-wrapper { top: 10px; left: 1rem; transform: none; } /* Pozycja suwaka na mniejszych ekranach */
+    .theme-switch-wrapper { margin-left: 0; margin-top: 10px; } /* Pozycja suwaka na mniejszych ekranach */
     .logo { margin-top: 10px; }
-    nav { margin-top: 10px; }
+    nav { margin-top: 10px; margin-right: 0; }
     nav a { margin: 0 10px; }
     .hero-content h1 { font-size: 3rem; }
     .hero-content p { font-size: 1.2rem; }
@@ -594,5 +594,4 @@ footer p { transition: color 0.5s; }
     .hero-content p { font-size: 1rem; }
     .section-title { font-size: 2rem; }
     nav a { margin: 0 5px; font-size: 0.9rem; }
-    .theme-switch-wrapper { left: 0.5rem; }
 }
