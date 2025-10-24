@@ -28,7 +28,7 @@ body.dark-theme {
 }
 
 
-/* --- PODSTAWOWE STYLE I TYPOGRAFIA (DODANO PRAWIDŁOWY RESET) --- */
+/* --- PODSTAWOWE STYLE I TYPOGRAFIA (NAPRAWIONY RESET) --- */
 * { 
     margin: 0; 
     padding: 0; 
@@ -47,7 +47,8 @@ body {
     font-size: 16px;
     overflow-x: hidden;
     transition: background-color 0.5s, color 0.5s; 
-    margin: 0; /* GWARANTUJE BRAK BIAŁEGO PASKA NA GÓRZE */
+    margin: 0; /* WAŻNE: GWARANTUJE BRAK MARGINESU U GÓRY */
+    padding: 0;
 }
 
 h1, h2, h3, h4 {
@@ -284,6 +285,7 @@ nav a:hover {
 .hero-content .btn {
     animation: fadeInUp 1s ease-out 0.9s forwards;
     opacity: 0;
+    text-decoration: none; /* Upewnienie się, że przycisk nie ma podkreślenia */
 }
 
 /* --- NOWY BANNER --- */
@@ -302,7 +304,7 @@ nav a:hover {
 #new-banner i { margin: 0 8px; }
 
 
-/* --- SEKCJA O NAS (NAPRAWIONE ZDJĘCIE) --- */
+/* --- SEKCJA O NAS --- */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
